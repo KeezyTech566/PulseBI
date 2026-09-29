@@ -1,4 +1,4 @@
-# Pulse-bi-solution
+# PulseBI Solution 
 A solution that helps user create dashboards easily
 # PulseBI - Executive Analytics & Multi-File Intelligence Suite
 
