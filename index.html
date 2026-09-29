@@ -48,13 +48,13 @@
         <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10 px-2">
             <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-indigo-400">
                 <i class="fa-solid fa-bolt"></i>
-                <span>Multi-Device BI & Data Integration Engine</span>
+                <span>Advanced BI & Multi-Chart Analytics Studio</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                Upload Multiple Data Sources. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Unified BI Dashboards.</span>
+                Upload Data. Map Axes. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Generate Any Chart.</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                Seamlessly ingest data files, inspect multi-column data types, and build comprehensive analytical portfolios optimized for phones, tablets, and computers.
+                Ingest multi-format files, configure X & Y axes dynamically, and build professional column, bar, line, histogram, and table dashboards.
             </p>
             <div class="flex justify-center gap-4 pt-2">
                 <button type="button" onclick="showAuthModal('signup')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center justify-center space-x-2 cursor-pointer">
@@ -131,20 +131,59 @@
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
                 <h2 class="text-lg sm:text-xl font-bold text-white">No Datasets Uploaded</h2>
-                <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">Upload one or multiple CSV or Excel files to automatically combine them, inspect data types, and generate your responsive BI dashboard.</p>
+                <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">Upload one or multiple CSV or Excel files to automatically combine them, map axes, and generate your multi-chart BI dashboard.</p>
                 <button type="button" onclick="openUploadModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition cursor-pointer">Upload Files Now</button>
             </div>
 
             <!-- Active Dashboard Body -->
             <div id="activeDashboardContent" class="hidden space-y-6 sm:space-y-8">
-                <!-- KPI Cards -->
+                
+                <!-- Axis Mapping & Chart Control Panel -->
+                <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center space-x-2">
+                                <i class="fa-solid fa-sliders text-indigo-400"></i>
+                                <span>Interactive Chart Studio & Axis Mapping</span>
+                            </h2>
+                            <p class="text-xs text-slate-400">Select your chart type and map X and Y data columns instantly.</p>
+                        </div>
+                        <span id="activeFilesSummary" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1.5 rounded-full truncate"></span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">CHART TYPE</label>
+                            <select id="chartTypeSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="bar">Column / Bar Chart</option>
+                                <option value="line">Line Chart (Trend)</option>
+                                <option value="histogram">Histogram (Frequency Distribution)</option>
+                                <option value="doughnut">Doughnut / Pie Breakdown</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">X-AXIS (CATEGORIES / LABELS)</label>
+                            <select id="xAxisSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Y-AXIS (NUMERIC METRIC)</label>
+                            <select id="yAxisSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KPI Summary Cards -->
                 <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
                         <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Total Records</p>
                         <h3 id="kpiRecords" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Numeric Metric Sum</p>
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Y-Axis Metric Sum</p>
                         <h3 id="kpiMetricSum" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
@@ -153,35 +192,35 @@
                     </div>
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
                         <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Schema Integrity</p>
-                        <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">Optimized</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">Validated</h3>
                     </div>
                 </section>
 
-                <!-- Charts Section -->
-                <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
-                        <h2 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Distribution Analysis</h2>
-                        <div class="relative w-full h-64 sm:h-80 flex items-center justify-center">
-                            <canvas id="primaryChart"></canvas>
-                        </div>
+                <!-- Primary Mapped Chart Studio -->
+                <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 id="primaryChartTitle" class="text-base sm:text-lg font-bold text-white">Mapped Data Analysis</h2>
+                        <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md">Live Interactive Canvas</span>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
-                        <h2 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Category Breakdown</h2>
-                        <div class="relative w-full h-64 sm:h-80 flex items-center justify-center">
-                            <canvas id="secondaryChart"></canvas>
-                        </div>
+                    <div class="relative w-full h-80 sm:h-96 flex items-center justify-center">
+                        <canvas id="primaryChart"></canvas>
                     </div>
                 </section>
 
-                <!-- Table Preview & Schema -->
+                <!-- Detailed Table Chart Section -->
                 <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <h2 class="text-base sm:text-lg font-bold text-white">Unified Dataset Preview & Column Types</h2>
-                        <span id="activeFilesSummary" class="text-[11px] sm:text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full truncate max-w-full sm:max-w-xs"></span>
+                        <h2 class="text-base sm:text-lg font-bold text-white">Tabular Data View & Schema Inspector</h2>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                <i class="fa-solid fa-search text-xs"></i>
+                            </span>
+                            <input type="text" id="tableSearch" onkeyup="searchTableRecords()" placeholder="Search dataset..." class="bg-slate-800 border border-slate-700 text-slate-200 text-xs sm:text-sm rounded-lg pl-9 pr-4 py-1.5 w-full sm:w-64 outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
                     </div>
-                    <div class="w-full overflow-x-auto rounded-xl border border-slate-800">
+                    <div class="w-full overflow-x-auto rounded-xl border border-slate-800 max-h-96">
                         <table class="w-full text-left border-collapse text-xs sm:text-sm whitespace-nowrap">
-                            <thead id="tableHead"></thead>
+                            <thead id="tableHead" class="sticky top-0 bg-slate-900 z-10"></thead>
                             <tbody id="tableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
                         </table>
                     </div>
@@ -234,7 +273,6 @@
         let currentUser = null;
         let unifiedDataset = null; 
         let primaryChartInstance = null;
-        let secondaryChartInstance = null;
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('pulse_bi_user');
@@ -332,7 +370,6 @@
             }
 
             const headers = Array.from(masterHeadersSet);
-            
             const normalizedRows = allRows.map(row => {
                 const newRow = {};
                 headers.forEach(h => {
@@ -364,9 +401,7 @@
                 const fileName = file.name.toLowerCase();
 
                 if (fileName.endsWith('.csv')) {
-                    reader.onload = (e) => {
-                        resolve(parseCSVText(e.target.result));
-                    };
+                    reader.onload = (e) => resolve(parseCSVText(e.target.result));
                     reader.readAsText(file);
                 } else if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
                     reader.onload = (e) => {
@@ -406,7 +441,6 @@
             return rows;
         }
 
-        // Data Type Inference
         function inferDataType(value) {
             if (value === null || value === undefined || value === '') return 'string';
             if (!isNaN(value)) {
@@ -443,10 +477,9 @@
             if (!unifiedDataset) return;
             saveUserWorkspace();
             closeUploadModal();
-            renderDashboardUI();
+            initDashboardStudio();
         }
 
-        // Persistence
         function saveUserWorkspace() {
             if (!currentUser || !unifiedDataset) return;
             localStorage.setItem(`pulse_bi_multidata_${currentUser.email}`, JSON.stringify(unifiedDataset));
@@ -457,103 +490,159 @@
             const stored = localStorage.getItem(`pulse_bi_multidata_${currentUser.email}`);
             if (stored) {
                 unifiedDataset = JSON.parse(stored);
-                renderDashboardUI();
+                initDashboardStudio();
             }
         }
 
-        // Render Dashboard & Visualizations
-        function renderDashboardUI() {
+        // Initialize Studio Controls & Axis Dropdowns
+        function initDashboardStudio() {
             if (!unifiedDataset) return;
 
             document.getElementById('emptyNotice').classList.add('hidden');
             document.getElementById('activeDashboardContent').classList.remove('hidden');
             document.getElementById('activeFilesSummary').innerText = `${unifiedDataset.fileNames.length} Files: ${unifiedDataset.fileNames.join(', ')}`;
 
+            // Populate X-Axis dropdown (All columns)
+            const xAxisSelect = document.getElementById('xAxisSelect');
+            xAxisSelect.innerHTML = '';
+            unifiedDataset.headers.forEach(h => {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.innerText = `${h} (${unifiedDataset.columnTypes[h]})`;
+                xAxisSelect.appendChild(opt);
+            });
+
+            // Populate Y-Axis dropdown (Prioritize numeric columns)
+            const yAxisSelect = document.getElementById('yAxisSelect');
+            yAxisSelect.innerHTML = '';
+            unifiedDataset.headers.forEach(h => {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.innerText = `${h} (${unifiedDataset.columnTypes[h]})`;
+                yAxisSelect.appendChild(opt);
+            });
+
+            // Set sensible default selections if available
+            const stringCol = unifiedDataset.headers.find(h => unifiedDataset.columnTypes[h] === 'string');
+            const numericCol = unifiedDataset.headers.find(h => ['integer', 'decimal'].includes(unifiedDataset.columnTypes[h]));
+            
+            if (stringCol) xAxisSelect.value = stringCol;
+            if (numericCol) yAxisSelect.value = numericCol;
+
+            renderActiveDashboard();
+            renderTableRecords(unifiedDataset.rows);
+        }
+
+        // Render Active Mapped Dashboard & Charts
+        function renderActiveDashboard() {
+            if (!unifiedDataset) return;
+
+            const chartType = document.getElementById('chartTypeSelect').value;
+            const xCol = document.getElementById('xAxisSelect').value;
+            const yCol = document.getElementById('yAxisSelect').value;
+
             // Update KPIs
             document.getElementById('kpiRecords').innerText = unifiedDataset.rows.length.toLocaleString();
             document.getElementById('kpiFileCount').innerText = unifiedDataset.fileNames.length;
 
-            const numericCol = unifiedDataset.headers.find(h => ['integer', 'decimal'].includes(unifiedDataset.columnTypes[h]));
-            let metricSum = 0;
-            if (numericCol) {
-                metricSum = unifiedDataset.rows.reduce((acc, curr) => acc + (parseFloat(curr[numericCol]) || 0), 0);
-                document.getElementById('kpiMetricSum').innerText = metricSum > 1000000 ? (metricSum / 1000000).toFixed(2) + 'M' : metricSum.toLocaleString();
-            } else {
-                document.getElementById('kpiMetricSum').innerText = "N/A";
+            let metricSum = unifiedDataset.rows.reduce((acc, curr) => acc + (parseFloat(curr[yCol]) || 0), 0);
+            document.getElementById('kpiMetricSum').innerText = metricSum > 1000000 ? (metricSum / 1000000).toFixed(2) + 'M' : metricSum.toLocaleString();
+
+            document.getElementById('primaryChartTitle').innerText = `${chartType.toUpperCase()} Analysis: ${yCol} by ${xCol}`;
+
+            // Aggregate Data for Chart
+            const aggregated = {};
+            unifiedDataset.rows.forEach(r => {
+                const key = r[xCol] !== undefined && r[xCol] !== "" ? String(r[xCol]) : "Unassigned";
+                const val = parseFloat(r[yCol]) || 0;
+                aggregated[key] = (aggregated[key] || 0) + val;
+            });
+
+            const labels = Object.keys(aggregated).slice(0, 25); // Limit to top 25 for clarity
+            const dataVals = labels.map(l => aggregated[l]);
+
+            // Render Chart.js
+            if (primaryChartInstance) primaryChartInstance.destroy();
+            const ctx = document.getElementById('primaryChart').getContext('2d');
+
+            let configType = 'bar';
+            let isHorizontal = false;
+            let fillArea = false;
+
+            if (chartType === 'line') {
+                configType = 'line';
+                fillArea = true;
+            } else if (chartType === 'histogram') {
+                configType = 'bar';
+            } else if (chartType === 'doughnut') {
+                configType = 'doughnut';
             }
 
-            // Render Table
+            primaryChartInstance = new Chart(ctx, {
+                type: configType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `${yCol}`,
+                        data: dataVals,
+                        backgroundColor: chartType === 'doughnut' ? ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'] : '#6366f1',
+                        borderColor: '#818cf8',
+                        borderWidth: chartType === 'line' ? 3 : 0,
+                        fill: fillArea,
+                        borderRadius: chartType === 'bar' ? 6 : 0,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            display: chartType === 'doughnut', 
+                            position: 'bottom', 
+                            labels: { color: '#94a3b8', boxWidth: 12, font: { size: 11 } } 
+                        }
+                    },
+                    scales: chartType === 'doughnut' ? {} : {
+                        x: { 
+                            title: { display: true, text: xCol, color: '#94a3b8', font: { weight: 'bold' } },
+                            ticks: { color: '#64748b', font: { size: 10 } }, 
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' } 
+                        },
+                        y: { 
+                            title: { display: true, text: `Sum of ${yCol}`, color: '#94a3b8', font: { weight: 'bold' } },
+                            ticks: { color: '#64748b', font: { size: 10 } }, 
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' } 
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render Table & Search
+        function renderTableRecords(rowsToRender) {
+            if (!unifiedDataset) return;
             const thead = document.getElementById('tableHead');
             const tbody = document.getElementById('tableBody');
+
             thead.innerHTML = `<tr class="border-b border-slate-800 text-slate-400 uppercase text-xs tracking-wider">${unifiedDataset.headers.map(h => `<th class="py-3 px-4 font-semibold">${h} <span class="text-[10px] text-indigo-400 font-mono lowercase">(${unifiedDataset.columnTypes[h]})</span></th>`).join('')}</tr>`;
             
             tbody.innerHTML = '';
-            unifiedDataset.rows.slice(0, 10).forEach(row => {
+            rowsToRender.slice(0, 50).forEach(row => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-800/40 transition';
                 tr.innerHTML = unifiedDataset.headers.map(h => `<td class="py-3 px-4 text-slate-300 truncate max-w-xs">${row[h]}</td>`).join('');
                 tbody.appendChild(tr);
             });
-
-            initCharts(numericCol);
         }
 
-        // Chart.js Generation
-        function initCharts(numericCol) {
-            const catCol = unifiedDataset.headers.find(h => unifiedDataset.columnTypes[h] === 'string') || unifiedDataset.headers[0];
-            
-            const counts = {};
-            unifiedDataset.rows.forEach(r => {
-                const key = r[catCol] || 'Unassigned';
-                counts[key] = (counts[key] || 0) + 1;
-            });
-
-            const labels = Object.keys(counts).slice(0, 8);
-            const dataVals = labels.map(l => counts[l]);
-
-            if (primaryChartInstance) primaryChartInstance.destroy();
-            const ctx1 = document.getElementById('primaryChart').getContext('2d');
-            primaryChartInstance = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Frequency Distribution',
-                        data: dataVals,
-                        backgroundColor: '#6366f1',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-                    scales: {
-                        x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
-                        y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } }
-                    }
-                }
-            });
-
-            if (secondaryChartInstance) secondaryChartInstance.destroy();
-            const ctx2 = document.getElementById('secondaryChart').getContext('2d');
-            secondaryChartInstance = new Chart(ctx2, {
-                type: 'doughnut',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: dataVals,
-                        backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', boxWidth: 10, font: { size: 11 } } } },
-                    cutout: '70%'
-                }
-            });
+        function searchTableRecords() {
+            if (!unifiedDataset) return;
+            const query = document.getElementById('tableSearch').value.toLowerCase();
+            const filtered = unifiedDataset.rows.filter(row => 
+                Object.values(row).some(val => String(val).toLowerCase().includes(query))
+            );
+            renderTableRecords(filtered);
         }
     </script>
 </body>
