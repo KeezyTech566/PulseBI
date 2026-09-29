@@ -25,46 +25,46 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
 
     <!-- ================= LANDING / ONBOARDING PAGE ================= -->
-    <div id="landingView" class="min-h-screen flex flex-col justify-between p-6 sm:p-12 relative overflow-hidden">
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div id="landingView" class="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-12 relative overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-40 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <header class="max-w-7xl mx-auto w-full flex items-center justify-between z-10">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
                 <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30">
-                    <i class="fa-solid fa-chart-line text-xl"></i>
+                    <i class="fa-solid fa-chart-line text-lg sm:text-xl"></i>
                 </div>
-                <span class="text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
+                <span class="text-lg sm:text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
             </div>
-            <div class="space-x-3">
-                <button onclick="showAuthModal('login')" class="text-slate-300 hover:text-white px-4 py-2 text-sm font-medium transition">Log In</button>
-                <button onclick="showAuthModal('signup')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-indigo-500/20">Get Started</button>
+            <div class="space-x-2 sm:space-x-3">
+                <button onclick="showAuthModal('login')" class="text-slate-300 hover:text-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition">Log In</button>
+                <button onclick="showAuthModal('signup')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition shadow-lg shadow-indigo-500/20">Get Started</button>
             </div>
         </header>
 
-        <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10">
+        <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10 px-2">
             <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-indigo-400">
                 <i class="fa-solid fa-bolt"></i>
-                <span>Multi-File BI & Data Integration Engine</span>
+                <span>Multi-Device BI & Data Integration Engine</span>
             </div>
-            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
                 Upload Multiple Data Sources. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Unified BI Dashboards.</span>
             </h1>
-            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
-                Seamlessly ingest multiple CSV or Excel files, inspect multi-column data types, and build comprehensive analytical portfolios instantly.
+            <p class="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+                Seamlessly ingest data files, inspect multi-column data types, and build comprehensive analytical portfolios optimized for phones, tablets, and computers.
             </p>
-            <div class="flex justify-center gap-4 pt-4">
-                <button onclick="showAuthModal('signup')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center space-x-2">
+            <div class="flex justify-center gap-4 pt-2">
+                <button onclick="showAuthModal('signup')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center justify-center space-x-2">
                     <span>Create Free Workspace</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
         </main>
 
-        <footer class="text-center text-xs text-slate-600 z-10">
+        <footer class="text-center text-xs text-slate-600 z-10 py-2">
             &copy; 2026 pulse bi solution. product solution
         </footer>
     </div>
@@ -103,84 +103,84 @@
     <div id="dashboardView" class="hidden flex-col min-h-screen">
         <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30">
-                        <i class="fa-solid fa-chart-line text-xl"></i>
+                <div class="flex items-center space-x-2 sm:space-x-3 truncate">
+                    <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/30 flex-shrink-0">
+                        <i class="fa-solid fa-chart-line text-lg sm:text-xl"></i>
                     </div>
-                    <div>
-                        <span class="text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
-                        <span class="block text-xs text-slate-400" id="userWorkspaceLabel">Workspace</span>
+                    <div class="truncate">
+                        <span class="text-base sm:text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
+                        <span class="block text-[10px] sm:text-xs text-slate-400 truncate max-w-[120px] sm:max-w-xs" id="userWorkspaceLabel">Workspace</span>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="openUploadModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 shadow-lg shadow-emerald-500/20">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button onclick="openUploadModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 shadow-lg shadow-emerald-500/20">
                         <i class="fa-solid fa-file-arrow-up"></i>
-                        <span>Upload Files</span>
+                        <span class="hidden xs:inline">Upload Files</span>
                     </button>
                     <button onclick="logout()" class="text-slate-400 hover:text-rose-400 p-2 rounded-lg transition" title="Log Out">
-                        <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                        <i class="fa-solid fa-right-from-bracket text-base sm:text-lg"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-8 w-full">
+        <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow space-y-6 sm:space-y-8 w-full">
             <!-- Empty Notice -->
-            <div id="emptyNotice" class="bg-slate-900/80 border border-dashed border-slate-700 rounded-2xl p-12 text-center space-y-4">
-                <div class="w-16 h-16 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+            <div id="emptyNotice" class="bg-slate-900/80 border border-dashed border-slate-700 rounded-2xl p-6 sm:p-12 text-center space-y-4">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl sm:text-2xl">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
-                <h2 class="text-xl font-bold text-white">No Datasets Uploaded</h2>
-                <p class="text-sm text-slate-400 max-w-md mx-auto">Upload one or multiple CSV or Excel files to automatically combine them, inspect data types, and generate your BI dashboard.</p>
-                <button onclick="openUploadModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition">Upload Files Now</button>
+                <h2 class="text-lg sm:text-xl font-bold text-white">No Datasets Uploaded</h2>
+                <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">Upload one or multiple CSV or Excel files to automatically combine them, inspect data types, and generate your responsive BI dashboard.</p>
+                <button onclick="openUploadModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition">Upload Files Now</button>
             </div>
 
             <!-- Active Dashboard Body -->
-            <div id="activeDashboardContent" class="hidden space-y-8">
+            <div id="activeDashboardContent" class="hidden space-y-6 sm:space-y-8">
                 <!-- KPI Cards -->
-                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
-                        <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Total Records</p>
-                        <h3 id="kpiRecords" class="text-2xl sm:text-3xl font-bold text-white mt-2">0</h3>
+                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Total Records</p>
+                        <h3 id="kpiRecords" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
-                        <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Numeric Metric Sum</p>
-                        <h3 id="kpiMetricSum" class="text-2xl sm:text-3xl font-bold text-white mt-2">0</h3>
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Numeric Metric Sum</p>
+                        <h3 id="kpiMetricSum" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
-                        <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Combined Files</p>
-                        <h3 id="kpiFileCount" class="text-2xl sm:text-3xl font-bold text-white mt-2">0</h3>
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Combined Files</p>
+                        <h3 id="kpiFileCount" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
-                        <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Schema Integrity</p>
-                        <h3 class="text-xl font-bold text-emerald-400 mt-2">Optimized</h3>
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Schema Integrity</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">Optimized</h3>
                     </div>
                 </section>
 
                 <!-- Charts Section -->
                 <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                        <h2 class="text-lg font-bold text-white mb-4">Distribution Analysis</h2>
-                        <div class="relative flex-grow h-72 sm:h-80 flex items-center justify-center">
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
+                        <h2 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Distribution Analysis</h2>
+                        <div class="relative w-full h-64 sm:h-80 flex items-center justify-center">
                             <canvas id="primaryChart"></canvas>
                         </div>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                        <h2 class="text-lg font-bold text-white mb-4">Category Breakdown</h2>
-                        <div class="relative flex-grow h-72 sm:h-80 flex items-center justify-center">
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
+                        <h2 class="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">Category Breakdown</h2>
+                        <div class="relative w-full h-64 sm:h-80 flex items-center justify-center">
                             <canvas id="secondaryChart"></canvas>
                         </div>
                     </div>
                 </section>
 
                 <!-- Table Preview & Schema -->
-                <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <h2 class="text-lg font-bold text-white">Unified Dataset Preview & Column Types</h2>
-                        <span id="activeFilesSummary" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full"></span>
+                        <h2 class="text-base sm:text-lg font-bold text-white">Unified Dataset Preview & Column Types</h2>
+                        <span id="activeFilesSummary" class="text-[11px] sm:text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full truncate max-w-full sm:max-w-xs"></span>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
+                    <div class="w-full overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm whitespace-nowrap">
                             <thead id="tableHead"></thead>
                             <tbody id="tableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
                         </table>
@@ -191,37 +191,37 @@
     </div>
 
     <!-- ================= MODAL: MULTI-FILE UPLOAD & SCHEMA INSPECTOR ================= -->
-    <div id="uploadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
+    <div id="uploadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-4 sm:p-8 shadow-2xl relative space-y-6 max-h-[92vh] overflow-y-auto">
             <button onclick="closeUploadModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             
             <div>
-                <h3 class="text-2xl font-bold text-white">Upload Multiple Data Sources</h3>
+                <h3 class="text-xl sm:text-2xl font-bold text-white">Upload Multiple Data Sources</h3>
                 <p class="text-xs text-slate-400">Select one or multiple `.csv`, `.xlsx`, or `.xls` files to combine.</p>
             </div>
 
             <!-- Dropzone -->
-            <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('multiFileInput').click()">
+            <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-6 sm:p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('multiFileInput').click()">
                 <input type="file" id="multiFileInput" accept=".csv, .xlsx, .xls" multiple class="hidden" onchange="handleMultipleFilesSelected(event)">
                 <div class="space-y-2">
                     <div class="w-12 h-12 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                     </div>
-                    <p class="text-sm font-medium text-white" id="uploadLabel">Click to browse or drop multiple files here</p>
-                    <p class="text-xs text-slate-500">Supports simultaneous CSV and Excel file uploads</p>
+                    <p class="text-xs sm:text-sm font-medium text-white" id="uploadLabel">Click to browse or drop multiple files here</p>
+                    <p class="text-[11px] text-slate-500">Supports simultaneous CSV and Excel file uploads</p>
                 </div>
             </div>
 
             <!-- Schema Type Preview Area -->
             <div id="schemaPreviewArea" class="hidden space-y-4">
                 <div>
-                    <h4 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2">Unified Schema & Inferred Data Types</h4>
-                    <div id="schemaTagsContainer" class="flex flex-wrap gap-2 bg-slate-950 p-4 rounded-xl border border-slate-800 max-h-44 overflow-y-auto">
+                    <h4 class="text-xs sm:text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2">Unified Schema & Inferred Data Types</h4>
+                    <div id="schemaTagsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-950 p-3 sm:p-4 rounded-xl border border-slate-800 max-h-48 overflow-y-auto">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
-                <button onclick="confirmCreateDashboard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition shadow-lg shadow-indigo-500/25 flex items-center justify-center space-x-2">
+                <button onclick="confirmCreateDashboard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition shadow-lg shadow-indigo-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span>Generate Unified Dashboard</span>
                 </button>
