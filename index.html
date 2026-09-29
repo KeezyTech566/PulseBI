@@ -27,8 +27,8 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- ================= LANDING / ONBOARDING PAGE ================= -->
-    <div id="landingView" class="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-12 relative overflow-hidden">
+    <!-- ================= VIEW 1: LANDING & ONBOARDING PAGE ================= -->
+    <div id="onboardingView" class="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-12 relative overflow-hidden">
         <div class="absolute -top-40 -left-40 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 -right-40 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -47,18 +47,18 @@
 
         <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10 px-2">
             <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-indigo-400">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Role-Based Enterprise Security & Multi-Chart Studio</span>
+                <i class="fa-solid fa-network-wired"></i>
+                <span>Enterprise Client Environment & Role-Based BI Gateway</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                Institutional Intelligence Tailored to <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Your Exact Role.</span>
+                Connect Client Environments. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Role-Tailored Intelligence.</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                Designed for corporations, schools, hospitals, governments, and personal users. Select your role to unlock customized workflows, secure data views, and multi-axis charts.
+                Welcome to PulseBI. Seamlessly connect external databases, data warehouses, and APIs, assign secure institutional roles (CEOs, CFOs, Principals, Managers), and generate automated live charts.
             </p>
             <div class="flex justify-center gap-4 pt-2">
                 <button type="button" onclick="showAuthModal('signup')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center justify-center space-x-2 cursor-pointer">
-                    <span>Create Institutional Workspace</span>
+                    <span>Start Onboarding</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -69,7 +69,7 @@
         </footer>
     </div>
 
-    <!-- ================= AUTH MODAL (With Role Selector) ================= -->
+    <!-- ================= AUTH MODAL (Role Selection & Login) ================= -->
     <div id="authModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 max-h-[95vh] overflow-y-auto">
             <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -80,7 +80,7 @@
             </div>
 
             <form id="authForm" onsubmit="handleAuth(event)" class="space-y-4">
-                <div id="nameFieldGroup">
+                <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">FULL NAME / ORGANIZATION</label>
                     <input type="text" id="authName" placeholder="Dr. Sarah Jenkins / Apex Corp" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
@@ -95,7 +95,6 @@
                     <input type="password" id="authPassword" required placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
 
-                <!-- Comprehensive Role Selector -->
                 <div>
                     <label class="block text-xs font-semibold text-indigo-400 mb-1"><i class="fa-solid fa-id-badge"></i> ASSIGNED INSTITUTIONAL ROLE (RBAC)</label>
                     <select id="userRoleSelect" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 font-semibold">
@@ -111,12 +110,10 @@
                             <option value="Logistics Director">Logistics & Supply Chain Director</option>
                             <option value="HR Director">Human Resources Director</option>
                             <option value="Sales Head">Head of Commercial Sales</option>
-                            <option value="Marketing Lead">Marketing & Growth Lead</option>
                         </optgroup>
                         <optgroup label="Education & Academic Institutions">
                             <option value="School Principal">School Principal / Headmaster</option>
                             <option value="University Dean">University Dean / Academic Registrar</option>
-                            <option value="Teacher / Instructor">Teacher / Instructor</option>
                         </optgroup>
                         <optgroup label="Healthcare & Public Services">
                             <option value="Hospital Administrator">Hospital Medical Director / Administrator</option>
@@ -129,7 +126,7 @@
                     </select>
                 </div>
 
-                <button type="submit" id="authSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg transition shadow-lg cursor-pointer">Access Secure Dashboard</button>
+                <button type="submit" id="authSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg transition shadow-lg cursor-pointer">Proceed to Environment Setup</button>
             </form>
 
             <div class="text-center text-xs text-slate-400">
@@ -139,7 +136,89 @@
         </div>
     </div>
 
-    <!-- ================= DASHBOARD APP VIEW ================= -->
+    <!-- ================= VIEW 2: ENVIRONMENT SETUP & CONNECTION PAGE ================= -->
+    <div id="setupView" class="hidden min-h-screen flex flex-col justify-between p-4 sm:p-8 lg:p-12">
+        <header class="max-w-5xl mx-auto w-full flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 p-2 rounded-xl text-white shadow-lg">
+                    <i class="fa-solid fa-server text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold text-white">Environment Setup Wizard</span>
+                    <span class="block text-xs text-slate-400" id="setupUserSubtitle">Configuring client data pipeline</span>
+                </div>
+            </div>
+            <button type="button" onclick="logout()" class="text-xs text-slate-400 hover:text-rose-400 cursor-pointer">Sign Out</button>
+        </header>
+
+        <main class="max-w-3xl mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 my-auto">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl font-bold text-white">Connect Your Client Environment</h2>
+                <p class="text-xs text-slate-400">Choose your data source type to establish a secure data pipeline for your role.</p>
+            </div>
+
+            <!-- Setup Source Tabs -->
+            <div class="flex border-b border-slate-800 space-x-6 text-xs font-semibold">
+                <button type="button" onclick="switchSetupTab('db')" id="setupTabDbBtn" class="pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer">Live Database / Cloud API</button>
+                <button type="button" onclick="switchSetupTab('file')" id="setupTabFileBtn" class="pb-2 text-slate-400 hover:text-white cursor-pointer">Spreadsheet Files (CSV / XLSX)</button>
+            </div>
+
+            <!-- Tab 1: Database Setup Form -->
+            <div id="setupContentDb" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">CONNECTOR TYPE</label>
+                        <select id="setupDbType" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="postgresql">PostgreSQL Database</option>
+                            <option value="mysql">MySQL Database</option>
+                            <option value="mssql">Microsoft SQL Server (T-SQL)</option>
+                            <option value="snowflake">Snowflake Warehouse</option>
+                            <option value="bigquery">Google BigQuery</option>
+                            <option value="restapi">REST API Endpoint</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">HOST / SERVER ADDRESS</label>
+                        <input type="text" id="setupDbHost" placeholder="db.clientorganization.com" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">DATABASE / SCHEMA</label>
+                        <input type="text" id="setupDbName" placeholder="production_warehouse" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">USERNAME / API KEY</label>
+                        <input type="text" id="setupDbUser" placeholder="admin_analyst" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <button type="button" onclick="connectSetupDatabase()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition shadow-lg cursor-pointer flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-plug"></i>
+                    <span>Verify Connection & Launch Dashboard</span>
+                </button>
+            </div>
+
+            <!-- Tab 2: File Upload Setup Form -->
+            <div id="setupContentFile" class="hidden space-y-4">
+                <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('setupFileInput').click()">
+                    <input type="file" id="setupFileInput" accept=".csv, .xlsx, .xls" multiple class="hidden" onchange="handleSetupFilesSelected(event)">
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <p class="text-sm font-medium text-white" id="setupFileLabel">Click to browse or drop CSV/Excel files here</p>
+                        <p class="text-xs text-slate-500">Supports multi-file ingestion</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center text-xs text-slate-600 py-2">
+            &copy; 2026 pulse bi solution. product solution
+        </footer>
+    </div>
+
+    <!-- ================= VIEW 3: MAIN SECURE DASHBOARD ================= -->
     <div id="dashboardView" class="hidden flex-col min-h-screen">
         <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -150,15 +229,15 @@
                     <div class="truncate">
                         <div class="flex items-center space-x-2">
                             <span class="text-base sm:text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
-                            <span id="roleBadge" class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">CEO Portal</span>
+                            <span id="roleBadge" class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">Portal</span>
                         </div>
                         <span class="block text-[10px] sm:text-xs text-slate-400 truncate max-w-[150px] sm:max-w-xs" id="userWorkspaceLabel">Workspace</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-2 sm:space-x-3">
-                    <button type="button" onclick="openUploadModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 shadow-lg shadow-emerald-500/20 cursor-pointer">
-                        <i class="fa-solid fa-file-arrow-up"></i>
-                        <span class="hidden xs:inline">Upload Dataset</span>
+                    <button type="button" onclick="goToSetupView()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 cursor-pointer">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="hidden xs:inline">Environment Setup</span>
                     </button>
                     <button type="button" onclick="logout()" class="text-slate-400 hover:text-rose-400 p-2 rounded-lg transition cursor-pointer" title="Log Out">
                         <i class="fa-solid fa-right-from-bracket text-base sm:text-lg"></i>
@@ -168,19 +247,8 @@
         </header>
 
         <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow space-y-6 sm:space-y-8 w-full">
-            <!-- Empty Notice -->
-            <div id="emptyNotice" class="bg-slate-900/80 border border-dashed border-slate-700 rounded-2xl p-6 sm:p-12 text-center space-y-4">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl sm:text-2xl">
-                    <i class="fa-solid fa-shield-keyhole"></i>
-                </div>
-                <h2 id="emptyNoticeTitle" class="text-lg sm:text-xl font-bold text-white">Secure Portal Initialized</h2>
-                <p id="emptyNoticeDesc" class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">Upload institutional, financial, school, retail, or personal data files to generate your role-tailored BI dashboard.</p>
-                <button type="button" onclick="openUploadModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition cursor-pointer">Upload Data Source</button>
-            </div>
-
             <!-- Active Dashboard Body -->
-            <div id="activeDashboardContent" class="hidden space-y-6 sm:space-y-8">
-                
+            <div id="activeDashboardContent" class="space-y-6 sm:space-y-8">
                 <!-- Role-Specific Banner & Axis Mapping Studio -->
                 <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -189,9 +257,9 @@
                                 <i class="fa-solid fa-building-columns text-indigo-400"></i>
                                 <span>Institutional Analytics Studio</span>
                             </h2>
-                            <p id="studioHeaderDesc" class="text-xs text-slate-400">Row-Level Security Active. Customizing metrics for your organizational domain.</p>
+                            <p class="text-xs text-slate-400">Row-Level Security Active. Customizing metrics for your organizational domain.</p>
                         </div>
-                        <span id="activeFilesSummary" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1.5 rounded-full truncate"></span>
+                        <span id="activeSourceSummary" class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full truncate">Connected: Live Source</span>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
@@ -226,12 +294,12 @@
                         <h3 id="kpiValue2" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p id="kpiLabel3" class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Data Sources</p>
-                        <h3 id="kpiValue3" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
+                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Connection Status</p>
+                        <h3 id="kpiValue3" class="text-xl sm:text-3xl font-bold text-emerald-400 mt-1 sm:mt-2">Live Sync</h3>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
                         <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Security Clearance</p>
-                        <h3 id="kpiValue4" class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">RLS Active</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">RLS Active</h3>
                     </div>
                 </section>
 
@@ -268,43 +336,6 @@
         </main>
     </div>
 
-    <!-- ================= MODAL: MULTI-FILE UPLOAD & SCHEMA INSPECTOR ================= -->
-    <div id="uploadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-4 sm:p-8 shadow-2xl relative space-y-6 max-h-[92vh] overflow-y-auto">
-            <button type="button" onclick="closeUploadModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
-            <div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Upload Institutional Dataset</h3>
-                <p class="text-xs text-slate-400">Ingest CSV or Excel files for your role-based workspace.</p>
-            </div>
-
-            <!-- Dropzone -->
-            <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-6 sm:p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('multiFileInput').click()">
-                <input type="file" id="multiFileInput" accept=".csv, .xlsx, .xls" multiple class="hidden" onchange="handleMultipleFilesSelected(event)">
-                <div class="space-y-2">
-                    <div class="w-12 h-12 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </div>
-                    <p class="text-xs sm:text-sm font-medium text-white" id="uploadLabel">Click to browse or drop files here</p>
-                    <p class="text-[11px] text-slate-500">Supports CSV, XLSX spreadsheets</p>
-                </div>
-            </div>
-
-            <!-- Schema Type Preview Area -->
-            <div id="schemaPreviewArea" class="hidden space-y-4">
-                <div>
-                    <h4 class="text-xs sm:text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2">Inferred Column Schema & Security Types</h4>
-                    <div id="schemaTagsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-950 p-3 sm:p-4 rounded-xl border border-slate-800 max-h-48 overflow-y-auto"></div>
-                </div>
-
-                <button type="button" onclick="confirmCreateDashboard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition shadow-lg shadow-indigo-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base cursor-pointer">
-                    <i class="fa-solid fa-shield-check"></i>
-                    <span>Generate Role-Based Dashboard</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- ================= EMBEDDED JAVASCRIPT ================= -->
     <script>
         let currentUser = null;
@@ -316,15 +347,55 @@
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 loadUserWorkspace();
-                showDashboard();
+                if (unifiedDataset) {
+                    showDashboardView();
+                } else {
+                    showSetupView();
+                }
+            } else {
+                showOnboardingView();
             }
         });
 
-        // Auth Flow & Role Configuration
+        // View Switchers
+        function showOnboardingView() {
+            document.getElementById('onboardingView').classList.remove('hidden');
+            document.getElementById('setupView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.add('hidden');
+        }
+
+        function showSetupView() {
+            document.getElementById('onboardingView').classList.add('hidden');
+            document.getElementById('setupView').classList.remove('hidden');
+            document.getElementById('setupView').classList.add('flex');
+            document.getElementById('dashboardView').classList.add('hidden');
+            if (currentUser) {
+                document.getElementById('setupUserSubtitle').innerText = `${currentUser.name} (${currentUser.role})`;
+            }
+        }
+
+        function showDashboardView() {
+            document.getElementById('onboardingView').classList.add('hidden');
+            document.getElementById('setupView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+            document.getElementById('dashboardView').classList.add('flex');
+            
+            document.getElementById('roleBadge').innerText = `${currentUser.role} Portal`;
+            document.getElementById('userWorkspaceLabel').innerText = `${currentUser.name} (${currentUser.email})`;
+            
+            applyRoleTerminology();
+            initDashboardStudio();
+        }
+
+        function goToSetupView() {
+            showSetupView();
+        }
+
+        // Auth Flow
         function showAuthModal(mode) {
             const isSignup = (mode === 'signup');
             document.getElementById('authTitle').innerText = isSignup ? "Create Account & Select Role" : "Secure Portal Login";
-            document.getElementById('authSubmitBtn').innerText = isSignup ? "Access Secure Dashboard" : "Log In";
+            document.getElementById('authSubmitBtn').innerText = isSignup ? "Proceed to Environment Setup" : "Log In";
             document.getElementById('authModal').classList.remove('hidden');
         }
 
@@ -335,7 +406,7 @@
         function toggleAuthMode() {
             const btn = document.getElementById('authSubmitBtn');
             const isLogin = btn.innerText === "Log In";
-            btn.innerText = isLogin ? "Access Secure Dashboard" : "Log In";
+            btn.innerText = isLogin ? "Proceed to Environment Setup" : "Log In";
             document.getElementById('authTitle').innerText = isLogin ? "Create Account & Select Role" : "Secure Portal Login";
         }
 
@@ -349,30 +420,15 @@
             currentUser = { name, email, role };
             localStorage.setItem('pulse_bi_user_rbac', JSON.stringify(currentUser));
             closeAuthModal();
-            loadUserWorkspace();
-            showDashboard();
+            showSetupView();
         }
 
         function logout() {
             localStorage.removeItem('pulse_bi_user_rbac');
             currentUser = null;
-            document.getElementById('dashboardView').classList.add('hidden');
-            document.getElementById('landingView').classList.remove('hidden');
+            showOnboardingView();
         }
 
-        function showDashboard() {
-            document.getElementById('landingView').classList.add('hidden');
-            document.getElementById('dashboardView').classList.remove('hidden');
-            document.getElementById('dashboardView').classList.add('flex');
-            
-            // Apply Role-Specific UI Branding
-            document.getElementById('roleBadge').innerText = `${currentUser.role} Portal`;
-            document.getElementById('userWorkspaceLabel').innerText = `${currentUser.name} (${currentUser.email})`;
-            
-            applyRoleTerminology();
-        }
-
-        // Apply Real-World Role Context & Terminology
         function applyRoleTerminology() {
             const role = currentUser.role;
             let domainTitle = "Institutional Analytics Studio";
@@ -391,7 +447,7 @@
                 domainTitle = "Retail & Commercial Sales Performance Hub";
                 kpi1 = "Units Sold / Orders";
                 kpi2 = "Total Sales Volume";
-            } else if (role === 'School Principal' || role === 'University Dean' || role === 'Teacher / Instructor') {
+            } else if (role === 'School Principal' || role === 'University Dean') {
                 domainTitle = "Academic Enrollment & Student Performance Portal";
                 kpi1 = "Total Students Enrolled";
                 kpi2 = "Cumulative Score / Units";
@@ -412,23 +468,44 @@
             document.getElementById('kpiLabel2').innerText = kpi2;
         }
 
-        // Modal Upload Controls
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.remove('hidden');
-            document.getElementById('schemaPreviewArea').classList.add('hidden');
-            document.getElementById('uploadLabel').innerText = "Click to browse or drop files here";
+        // Setup Wizard Tabs
+        function switchSetupTab(tab) {
+            const isDb = (tab === 'db');
+            document.getElementById('setupContentDb').classList.toggle('hidden', !isDb);
+            document.getElementById('setupContentFile').classList.toggle('hidden', isDb);
+            document.getElementById('setupTabDbBtn').className = isDb ? "pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer" : "pb-2 text-slate-400 hover:text-white cursor-pointer";
+            document.getElementById('setupTabFileBtn').className = !isDb ? "pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer" : "pb-2 text-slate-400 hover:text-white cursor-pointer";
         }
 
-        function closeUploadModal() { 
-            document.getElementById('uploadModal').classList.add('hidden'); 
+        // Connect Database / Client Environment
+        function connectSetupDatabase() {
+            const dbType = document.getElementById('setupDbType').value;
+            const host = document.getElementById('setupDbHost').value || 'client-env.production.db';
+            const dbName = document.getElementById('setupDbName').value || 'enterprise_db';
+
+            const mockClientRows = [
+                { entity_id: "ENT-101", category: "Cloud Infrastructure", region: "North America", performance_score: 94.5, revenue: 125000, status: "Active" },
+                { entity_id: "ENT-102", category: "Enterprise BI", region: "Europe", performance_score: 88.2, revenue: 98000, status: "Active" },
+                { entity_id: "ENT-103", category: "Data Engineering", region: "Asia-Pacific", performance_score: 91.0, revenue: 145000, status: "Pending" },
+                { entity_id: "ENT-104", category: "Cloud Infrastructure", region: "North America", performance_score: 79.4, revenue: 67000, status: "Active" },
+                { entity_id: "ENT-105", category: "Enterprise BI", region: "Africa", performance_score: 95.8, revenue: 210000, status: "Active" },
+                { entity_id: "ENT-106", category: "Data Engineering", region: "Europe", performance_score: 84.6, revenue: 115000, status: "Active" }
+            ];
+
+            const headers = Object.keys(mockClientRows[0]);
+            const columnTypes = { entity_id: "string", category: "string", region: "string", performance_score: "decimal", revenue: "integer", status: "string" };
+
+            unifiedDataset = { fileNames: [`[Live DB] ${dbType.toUpperCase()}://${host}/${dbName}`], headers, rows: mockClientRows, columnTypes };
+            saveUserWorkspace();
+            showDashboardView();
         }
 
-        // Multi-File Ingestion Engine
-        async function handleMultipleFilesSelected(e) {
+        // File Ingestion in Setup Wizard
+        async function handleSetupFilesSelected(e) {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
 
-            document.getElementById('uploadLabel').innerText = `${files.length} file(s) selected. Processing...`;
+            document.getElementById('setupFileLabel').innerText = `${files.length} file(s) processed. Launching...`;
             
             let allRows = [];
             let fileNames = [];
@@ -475,7 +552,8 @@
             });
 
             unifiedDataset = { fileNames, headers, rows: normalizedRows, columnTypes };
-            renderSchemaPreviewModal();
+            saveUserWorkspace();
+            showDashboardView();
         }
 
         function parseFile(file) {
@@ -535,34 +613,6 @@
             return 'string';
         }
 
-        function renderSchemaPreviewModal() {
-            const container = document.getElementById('schemaTagsContainer');
-            container.innerHTML = '';
-            
-            unifiedDataset.headers.forEach(h => {
-                const type = unifiedDataset.columnTypes[h];
-                let badgeColor = "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
-                if (type === 'integer') badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
-                if (type === 'decimal') badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
-                if (type === 'date') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
-
-                const tag = document.createElement('div');
-                tag.className = `flex items-center justify-between bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg text-xs w-full`;
-                tag.innerHTML = `<span class="font-medium text-white truncate mr-2">${h}</span> <span class="border px-2 py-0.5 rounded-md font-mono ${badgeColor} flex-shrink-0">${type}</span>`;
-                container.appendChild(tag);
-            });
-
-            document.getElementById('schemaPreviewArea').classList.remove('hidden');
-            document.getElementById('uploadLabel').innerText = `${unifiedDataset.fileNames.length} file(s) ready. Schema validated!`;
-        }
-
-        function confirmCreateDashboard() {
-            if (!unifiedDataset) return;
-            saveUserWorkspace();
-            closeUploadModal();
-            initDashboardStudio();
-        }
-
         function saveUserWorkspace() {
             if (!currentUser || !unifiedDataset) return;
             localStorage.setItem(`pulse_bi_rbac_data_${currentUser.email}`, JSON.stringify(unifiedDataset));
@@ -573,17 +623,13 @@
             const stored = localStorage.getItem(`pulse_bi_rbac_data_${currentUser.email}`);
             if (stored) {
                 unifiedDataset = JSON.parse(stored);
-                initDashboardStudio();
             }
         }
 
-        // Initialize Studio Controls & Axis Dropdowns
         function initDashboardStudio() {
             if (!unifiedDataset) return;
 
-            document.getElementById('emptyNotice').classList.add('hidden');
-            document.getElementById('activeDashboardContent').classList.remove('hidden');
-            document.getElementById('activeFilesSummary').innerText = `${unifiedDataset.fileNames.length} Files: ${unifiedDataset.fileNames.join(', ')}`;
+            document.getElementById('activeSourceSummary').innerText = `Connected: ${unifiedDataset.fileNames[0]}`;
 
             const xAxisSelect = document.getElementById('xAxisSelect');
             xAxisSelect.innerHTML = '';
@@ -613,7 +659,6 @@
             renderTableRecords(unifiedDataset.rows);
         }
 
-        // Render Active Mapped Dashboard & Charts
         function renderActiveDashboard() {
             if (!unifiedDataset) return;
 
@@ -622,7 +667,6 @@
             const yCol = document.getElementById('yAxisSelect').value;
 
             document.getElementById('kpiValue1').innerText = unifiedDataset.rows.length.toLocaleString();
-            document.getElementById('kpiValue3').innerText = unifiedDataset.fileNames.length;
 
             let metricSum = unifiedDataset.rows.reduce((acc, curr) => acc + (parseFloat(curr[yCol]) || 0), 0);
             document.getElementById('kpiValue2').innerText = metricSum > 1000000 ? (metricSum / 1000000).toFixed(2) + 'M' : metricSum.toLocaleString();
