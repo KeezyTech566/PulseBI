@@ -27,7 +27,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- ================= VIEW 1: LANDING & ONBOARDING PAGE ================= -->
+    <!-- ================= VIEW 1: LANDING & ONBOARDING ================= -->
     <div id="onboardingView" class="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-12 relative overflow-hidden">
         <div class="absolute -top-40 -left-40 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 -right-40 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -47,14 +47,14 @@
 
         <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10 px-2">
             <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-indigo-400">
-                <i class="fa-solid fa-network-wired"></i>
-                <span>Enterprise Client Environment & Role-Based BI Gateway</span>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Enterprise BI Studio & Report Publisher (APR, MPR, HR, HSSEQ, FINANCE)</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                Connect Client Environments. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Role-Tailored Intelligence.</span>
+                Build Visuals. Write Measures. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Publish Reports.</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                Welcome to PulseBI. Seamlessly connect external databases, data warehouses, and APIs, assign secure institutional roles (CEOs, CFOs, Principals, Managers), and generate automated live charts.
+                Connect client databases or files, use the Visual Builder pane to create custom gauges, line, bar, and histogram charts, author measures, and publish instant institutional reports.
             </p>
             <div class="flex justify-center gap-4 pt-2">
                 <button type="button" onclick="showAuthModal('signup')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center justify-center space-x-2 cursor-pointer">
@@ -69,14 +69,14 @@
         </footer>
     </div>
 
-    <!-- ================= AUTH MODAL (Role Selection & Login) ================= -->
+    <!-- ================= AUTH MODAL ================= -->
     <div id="authModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 max-h-[95vh] overflow-y-auto">
             <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             
             <div class="text-center space-y-2">
                 <h3 id="authTitle" class="text-2xl font-bold text-white">Create Account & Select Role</h3>
-                <p id="authSubtitle" class="text-xs text-slate-400">Configure secure role-based access control (RBAC)</p>
+                <p id="authSubtitle" class="text-xs text-slate-400">Configure role-based reporting permissions</p>
             </div>
 
             <form id="authForm" onsubmit="handleAuth(event)" class="space-y-4">
@@ -96,47 +96,23 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-indigo-400 mb-1"><i class="fa-solid fa-id-badge"></i> ASSIGNED INSTITUTIONAL ROLE (RBAC)</label>
+                    <label class="block text-xs font-semibold text-indigo-400 mb-1"><i class="fa-solid fa-id-badge"></i> INSTITUTIONAL ROLE</label>
                     <select id="userRoleSelect" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 font-semibold">
-                        <optgroup label="Corporate & Executive Leadership">
-                            <option value="CEO">Chief Executive Officer (CEO)</option>
-                            <option value="CFO">Chief Financial Officer (CFO)</option>
-                            <option value="CTO">Chief Technology Officer (CTO)</option>
-                            <option value="COO">Chief Operating Officer (COO)</option>
-                            <option value="CDO">Chief Data Officer (CDO)</option>
-                        </optgroup>
-                        <optgroup label="Operations & Commercial Management">
-                            <option value="Retail Manager">Retail & Store Manager</option>
-                            <option value="Logistics Director">Logistics & Supply Chain Director</option>
-                            <option value="HR Director">Human Resources Director</option>
-                            <option value="Sales Head">Head of Commercial Sales</option>
-                        </optgroup>
-                        <optgroup label="Education & Academic Institutions">
-                            <option value="School Principal">School Principal / Headmaster</option>
-                            <option value="University Dean">University Dean / Academic Registrar</option>
-                        </optgroup>
-                        <optgroup label="Healthcare & Public Services">
-                            <option value="Hospital Administrator">Hospital Medical Director / Administrator</option>
-                            <option value="Public Sector Official">Government / Public Sector Analyst</option>
-                        </optgroup>
-                        <optgroup label="Personal & Independent Users">
-                            <option value="Personal Finance Planner">Personal Wealth & Budget Planner</option>
-                            <option value="Freelancer / Consultant">Independent Consultant / Freelancer</option>
-                        </optgroup>
+                        <option value="CEO">Chief Executive Officer (CEO)</option>
+                        <option value="CFO">Chief Financial Officer (CFO)</option>
+                        <option value="HR Director">Human Resources Director (HR)</option>
+                        <option value="HSSEQ Head">HSSEQ & Safety Director</option>
+                        <option value="School Principal">School Principal / Administrator</option>
+                        <option value="Personal Planner">Personal Wealth & Finance Planner</option>
                     </select>
                 </div>
 
                 <button type="submit" id="authSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg transition shadow-lg cursor-pointer">Proceed to Environment Setup</button>
             </form>
-
-            <div class="text-center text-xs text-slate-400">
-                <span id="authSwitchText">Already have a workspace?</span> 
-                <button type="button" onclick="toggleAuthMode()" id="authSwitchBtn" class="text-indigo-400 font-semibold hover:underline ml-1 cursor-pointer">Log In</button>
-            </div>
         </div>
     </div>
 
-    <!-- ================= VIEW 2: ENVIRONMENT SETUP & CONNECTION PAGE ================= -->
+    <!-- ================= VIEW 2: ENVIRONMENT SETUP ================= -->
     <div id="setupView" class="hidden min-h-screen flex flex-col justify-between p-4 sm:p-8 lg:p-12">
         <header class="max-w-5xl mx-auto w-full flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -145,7 +121,7 @@
                 </div>
                 <div>
                     <span class="text-lg font-bold text-white">Environment Setup Wizard</span>
-                    <span class="block text-xs text-slate-400" id="setupUserSubtitle">Configuring client data pipeline</span>
+                    <span class="block text-xs text-slate-400" id="setupUserSubtitle">Configuring data source</span>
                 </div>
             </div>
             <button type="button" onclick="logout()" class="text-xs text-slate-400 hover:text-rose-400 cursor-pointer">Sign Out</button>
@@ -153,62 +129,28 @@
 
         <main class="max-w-3xl mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 my-auto">
             <div class="text-center space-y-2">
-                <h2 class="text-2xl font-bold text-white">Connect Your Client Environment</h2>
-                <p class="text-xs text-slate-400">Choose your data source type to establish a secure data pipeline for your role.</p>
+                <h2 class="text-2xl font-bold text-white">Connect Client Environment or Load Sample</h2>
+                <p class="text-xs text-slate-400">Connect to external databases, APIs, upload files, or load pre-built institutional templates.</p>
             </div>
 
-            <!-- Setup Source Tabs -->
-            <div class="flex border-b border-slate-800 space-x-6 text-xs font-semibold">
-                <button type="button" onclick="switchSetupTab('db')" id="setupTabDbBtn" class="pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer">Live Database / Cloud API</button>
-                <button type="button" onclick="switchSetupTab('file')" id="setupTabFileBtn" class="pb-2 text-slate-400 hover:text-white cursor-pointer">Spreadsheet Files (CSV / XLSX)</button>
-            </div>
-
-            <!-- Tab 1: Database Setup Form -->
-            <div id="setupContentDb" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">CONNECTOR TYPE</label>
-                        <select id="setupDbType" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="postgresql">PostgreSQL Database</option>
-                            <option value="mysql">MySQL Database</option>
-                            <option value="mssql">Microsoft SQL Server (T-SQL)</option>
-                            <option value="snowflake">Snowflake Warehouse</option>
-                            <option value="bigquery">Google BigQuery</option>
-                            <option value="restapi">REST API Endpoint</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">HOST / SERVER ADDRESS</label>
-                        <input type="text" id="setupDbHost" placeholder="db.clientorganization.com" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
+            <!-- Setup Action Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div onclick="loadSampleTemplate('finance')" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-5 rounded-xl cursor-pointer transition space-y-2">
+                    <div class="text-indigo-400 text-xl"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <h4 class="font-bold text-white text-sm">Load Finance / APR / MPR Template</h4>
+                    <p class="text-xs text-slate-400">Instantly populate financial health, balance sheet, and annual progress data.</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">DATABASE / SCHEMA</label>
-                        <input type="text" id="setupDbName" placeholder="production_warehouse" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">USERNAME / API KEY</label>
-                        <input type="text" id="setupDbUser" placeholder="admin_analyst" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
+                <div onclick="loadSampleTemplate('hsseq')" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-5 rounded-xl cursor-pointer transition space-y-2">
+                    <div class="text-emerald-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4 class="font-bold text-white text-sm">Load HSSEQ / HR / IASL Template</h4>
+                    <p class="text-xs text-slate-400">Instantly populate safety incidents, HR headcount, and audit logs.</p>
                 </div>
-                <button type="button" onclick="connectSetupDatabase()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition shadow-lg cursor-pointer flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-plug"></i>
-                    <span>Verify Connection & Launch Dashboard</span>
-                </button>
             </div>
 
-            <!-- Tab 2: File Upload Setup Form -->
-            <div id="setupContentFile" class="hidden space-y-4">
-                <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('setupFileInput').click()">
-                    <input type="file" id="setupFileInput" accept=".csv, .xlsx, .xls" multiple class="hidden" onchange="handleSetupFilesSelected(event)">
-                    <div class="space-y-2">
-                        <div class="w-12 h-12 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                        </div>
-                        <p class="text-sm font-medium text-white" id="setupFileLabel">Click to browse or drop CSV/Excel files here</p>
-                        <p class="text-xs text-slate-500">Supports multi-file ingestion</p>
-                    </div>
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">UPLOAD CUSTOM SPREADSHEET (CSV / XLSX)</label>
+                    <input type="file" id="setupFileInput" accept=".csv, .xlsx, .xls" multiple onchange="handleSetupFilesSelected(event)" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-300">
                 </div>
             </div>
         </main>
@@ -218,7 +160,7 @@
         </footer>
     </div>
 
-    <!-- ================= VIEW 3: MAIN SECURE DASHBOARD ================= -->
+    <!-- ================= VIEW 3: MAIN STUDIO & REPORT PUBLISHER ================= -->
     <div id="dashboardView" class="hidden flex-col min-h-screen">
         <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -228,136 +170,190 @@
                     </div>
                     <div class="truncate">
                         <div class="flex items-center space-x-2">
-                            <span class="text-base sm:text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span></span>
-                            <span id="roleBadge" class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">Portal</span>
+                            <span class="text-base sm:text-xl font-bold tracking-tight text-white">Pulse<span class="text-indigo-400">BI</span> Studio</span>
+                            <span id="roleBadge" class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] px-2 py-0.5 rounded-full font-mono uppercase">Portal</span>
                         </div>
-                        <span class="block text-[10px] sm:text-xs text-slate-400 truncate max-w-[150px] sm:max-w-xs" id="userWorkspaceLabel">Workspace</span>
+                        <span class="block text-[10px] sm:text-xs text-slate-400 truncate max-w-[150px]" id="userWorkspaceLabel">Workspace</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-2 sm:space-x-3">
-                    <button type="button" onclick="goToSetupView()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 cursor-pointer">
-                        <i class="fa-solid fa-gear"></i>
-                        <span class="hidden xs:inline">Environment Setup</span>
+                    <button type="button" onclick="openPublishModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 shadow-lg shadow-indigo-500/20 cursor-pointer">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Publish Report</span>
                     </button>
-                    <button type="button" onclick="logout()" class="text-slate-400 hover:text-rose-400 p-2 rounded-lg transition cursor-pointer" title="Log Out">
-                        <i class="fa-solid fa-right-from-bracket text-base sm:text-lg"></i>
+                    <button type="button" onclick="goToSetupView()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-gear"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow space-y-6 sm:space-y-8 w-full">
-            <!-- Active Dashboard Body -->
-            <div id="activeDashboardContent" class="space-y-6 sm:space-y-8">
-                <!-- Role-Specific Banner & Axis Mapping Studio -->
-                <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                            <h2 id="studioHeaderTitle" class="text-lg font-bold text-white flex items-center space-x-2">
-                                <i class="fa-solid fa-building-columns text-indigo-400"></i>
-                                <span>Institutional Analytics Studio</span>
-                            </h2>
-                            <p class="text-xs text-slate-400">Row-Level Security Active. Customizing metrics for your organizational domain.</p>
-                        </div>
-                        <span id="activeSourceSummary" class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full truncate">Connected: Live Source</span>
-                    </div>
+        <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-6 w-full">
+            
+            <!-- Quick Report Template Switcher -->
+            <section class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold text-slate-400 mr-2"><i class="fa-solid fa-file-lines text-indigo-400"></i> INSTANT REPORTS:</span>
+                    <button type="button" onclick="switchReportTemplate('APR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">APR</button>
+                    <button type="button" onclick="switchReportTemplate('MPR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">MPR</button>
+                    <button type="button" onclick="switchReportTemplate('HR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HR</button>
+                    <button type="button" onclick="switchReportTemplate('HSSEQ')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HSSEQ</button>
+                    <button type="button" onclick="switchReportTemplate('IASL')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">IASL</button>
+                    <button type="button" onclick="switchReportTemplate('FINANCE')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">FINANCE</button>
+                </div>
+                <button type="button" onclick="openMeasureModal()" class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-600/30 transition cursor-pointer">
+                    <i class="fa-solid fa-calculator"></i> New Measure
+                </button>
+            </section>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">CHART VIEW TYPE</label>
-                            <select id="chartTypeSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500">
-                                <option value="bar">Column / Bar Chart</option>
-                                <option value="line">Line Chart (Trend)</option>
-                                <option value="histogram">Histogram (Frequency Distribution)</option>
-                                <option value="doughnut">Doughnut / Pie Breakdown</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">X-AXIS (DIMENSION / CATEGORY)</label>
-                            <select id="xAxisSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"></select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Y-AXIS (METRIC / VALUE)</label>
-                            <select id="yAxisSelect" onchange="renderActiveDashboard()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"></select>
-                        </div>
-                    </div>
-                </section>
+            <!-- BUILD A VISUAL PANE (Power BI Style) -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
+                        <i class="fa-solid fa-hammer text-indigo-400"></i>
+                        <span>Build a Visual Pane</span>
+                    </h2>
+                    <span id="activeReportBadge" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-mono">Custom Report</span>
+                </div>
 
-                <!-- Dynamic Role-Tailored KPI Cards -->
-                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p id="kpiLabel1" class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Total Records</p>
-                        <h3 id="kpiValue1" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">VISUAL TYPE</label>
+                        <select id="visualTypeSelect" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
+                            <option value="bar">Column / Bar Chart</option>
+                            <option value="line">Line Chart (Trend)</option>
+                            <option value="gauge">Gauge KPI Meter</option>
+                            <option value="doughnut">Doughnut / Pie Breakdown</option>
+                            <option value="histogram">Histogram Distribution</option>
+                            <option value="table">Data Grid Table</option>
+                        </select>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p id="kpiLabel2" class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Metric Sum</p>
-                        <h3 id="kpiValue2" class="text-xl sm:text-3xl font-bold text-white mt-1 sm:mt-2">0</h3>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AXIS X (CATEGORY)</label>
+                        <select id="visualXAxis" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none"></select>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Connection Status</p>
-                        <h3 id="kpiValue3" class="text-xl sm:text-3xl font-bold text-emerald-400 mt-1 sm:mt-2">Live Sync</h3>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AXIS Y (METRIC)</label>
+                        <select id="visualYAxis" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none"></select>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
-                        <p class="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">Security Clearance</p>
-                        <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mt-1 sm:mt-2">RLS Active</h3>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AGGREGATION</label>
+                        <select id="visualAgg" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
+                            <option value="sum">Sum</option>
+                            <option value="avg">Average</option>
+                            <option value="count">Count</option>
+                        </select>
                     </div>
-                </section>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">DATE SLIDER RANGE</label>
+                        <select id="dateSlider" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
+                            <option value="all">All Time (No Filter)</option>
+                            <option value="q3">Q3 2026 Period</option>
+                            <option value="ytd">YTD 2026</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
 
-                <!-- Primary Mapped Chart Canvas -->
-                <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl flex flex-col">
+            <!-- Dynamic Canvas Visual Display -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Canvas Chart -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 id="primaryChartTitle" class="text-base sm:text-lg font-bold text-white">Mapped Institutional Analysis</h2>
-                        <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-md">Secure Canvas</span>
+                        <h3 id="canvasVisualTitle" class="text-base font-bold text-white">Visual Output Canvas</h3>
+                        <span class="text-xs text-slate-400 bg-slate-800 px-2 py-1 rounded">Live Render</span>
                     </div>
                     <div class="relative w-full h-80 sm:h-96 flex items-center justify-center">
                         <canvas id="primaryChart"></canvas>
                     </div>
-                </section>
+                </div>
 
-                <!-- Detailed Tabular View & Data Table -->
-                <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <h2 class="text-base sm:text-lg font-bold text-white">Secure Data Grid & Row Inspector</h2>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-search text-xs"></i>
-                            </span>
-                            <input type="text" id="tableSearch" onkeyup="searchTableRecords()" placeholder="Search secure records..." class="bg-slate-800 border border-slate-700 text-slate-200 text-xs sm:text-sm rounded-lg pl-9 pr-4 py-1.5 w-full sm:w-64 outline-none focus:ring-2 focus:ring-indigo-500">
-                        </div>
+                <!-- Secondary Gauge / KPI Summary Box -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-1">Executive KPI Summary</h3>
+                        <p class="text-xs text-slate-400">Aggregated performance indicators.</p>
                     </div>
-                    <div class="w-full overflow-x-auto rounded-xl border border-slate-800 max-h-96">
-                        <table class="w-full text-left border-collapse text-xs sm:text-sm whitespace-nowrap">
-                            <thead id="tableHead" class="sticky top-0 bg-slate-900 z-10"></thead>
-                            <tbody id="tableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
-                        </table>
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2 text-center">
+                        <p id="kpiCardLabel" class="text-xs font-semibold text-slate-400 uppercase">Selected Metric Total</p>
+                        <h2 id="kpiCardValue" class="text-3xl font-ext500 font-bold text-emerald-400">0</h2>
                     </div>
-                </section>
-            </div>
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2 text-center">
+                        <p class="text-xs font-semibold text-slate-400 uppercase">Total Rows Evaluated</p>
+                        <h2 id="kpiRowsValue" class="text-2xl font-bold text-indigo-400">0</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secure Data Grid Table -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-base font-bold text-white">Underlying Data Grid</h3>
+                    <input type="text" id="tableSearch" onkeyup="searchTableRecords()" placeholder="Search records..." class="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 outline-none w-48">
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-slate-800 max-h-80">
+                    <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+                        <thead id="tableHead" class="sticky top-0 bg-slate-900 z-10"></thead>
+                        <tbody id="tableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+                    </table>
+                </div>
+            </section>
         </main>
+    </div>
+
+    <!-- ================= MODAL: PUBLISH REPORT ================= -->
+    <div id="publishModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4 text-center">
+            <button type="button" onclick="closePublishModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-12 h-12 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Report Successfully Published!</h3>
+            <p class="text-xs text-slate-400">Your report configuration has been compiled and secured for stakeholder access.</p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs font-mono text-indigo-400 truncate">
+                https://pulsebi.app/report/published-executive-suite
+            </div>
+            <button type="button" onclick="closePublishModal()" class="w-full bg-indigo-600 text-white py-2 rounded-lg text-xs font-semibold cursor-pointer">Done</button>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: WRITE NEW MEASURE ================= -->
+    <div id="measureModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button type="button" onclick="closeMeasureModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-lg font-bold text-white">Author New DAX / JS Measure</h3>
+            <p class="text-xs text-slate-400">Define custom formula expressions for your workspace.</p>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">MEASURE NAME</label>
+                    <input type="text" id="measureName" placeholder="Total_Profit_Margin" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">EXPRESSION</label>
+                    <textarea id="measureExpr" placeholder="SUM(revenue) / COUNT(entity_id)" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg p-3 outline-none h-20"></textarea>
+                </div>
+                <button type="button" onclick="saveNewMeasure()" class="w-full bg-emerald-600 text-white py-2.5 rounded-lg text-xs font-semibold cursor-pointer">Save & Calculate Measure</button>
+            </div>
+        </div>
     </div>
 
     <!-- ================= EMBEDDED JAVASCRIPT ================= -->
     <script>
         let currentUser = null;
-        let unifiedDataset = null; 
+        let activeDataset = null;
         let primaryChartInstance = null;
+        let customMeasures = {};
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('pulse_bi_user_rbac');
+            const savedUser = localStorage.getItem('pulse_bi_user_v2');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
-                loadUserWorkspace();
-                if (unifiedDataset) {
-                    showDashboardView();
-                } else {
-                    showSetupView();
-                }
+                loadSampleTemplate('finance');
             } else {
                 showOnboardingView();
             }
         });
 
-        // View Switchers
         function showOnboardingView() {
             document.getElementById('onboardingView').classList.remove('hidden');
             document.getElementById('setupView').classList.add('hidden');
@@ -381,386 +377,224 @@
             document.getElementById('dashboardView').classList.add('flex');
             
             document.getElementById('roleBadge').innerText = `${currentUser.role} Portal`;
-            document.getElementById('userWorkspaceLabel').innerText = `${currentUser.name} (${currentUser.email})`;
-            
-            applyRoleTerminology();
-            initDashboardStudio();
+            document.getElementById('userWorkspaceLabel').innerText = `${currentUser.name}`;
         }
 
-        function goToSetupView() {
-            showSetupView();
-        }
+        function goToSetupView() { showSetupView(); }
 
-        // Auth Flow
         function showAuthModal(mode) {
-            const isSignup = (mode === 'signup');
-            document.getElementById('authTitle').innerText = isSignup ? "Create Account & Select Role" : "Secure Portal Login";
-            document.getElementById('authSubmitBtn').innerText = isSignup ? "Proceed to Environment Setup" : "Log In";
             document.getElementById('authModal').classList.remove('hidden');
         }
-
-        function closeAuthModal() { 
-            document.getElementById('authModal').classList.add('hidden'); 
-        }
-
-        function toggleAuthMode() {
-            const btn = document.getElementById('authSubmitBtn');
-            const isLogin = btn.innerText === "Log In";
-            btn.innerText = isLogin ? "Proceed to Environment Setup" : "Log In";
-            document.getElementById('authTitle').innerText = isLogin ? "Create Account & Select Role" : "Secure Portal Login";
-        }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
 
         function handleAuth(e) {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
-            const nameField = document.getElementById('authName');
-            const name = (nameField && nameField.value) ? nameField.value : email.split('@')[0];
+            const name = document.getElementById('authName').value || email.split('@')[0];
             const role = document.getElementById('userRoleSelect').value;
             
             currentUser = { name, email, role };
-            localStorage.setItem('pulse_bi_user_rbac', JSON.stringify(currentUser));
+            localStorage.setItem('pulse_bi_user_v2', JSON.stringify(currentUser));
             closeAuthModal();
             showSetupView();
         }
 
         function logout() {
-            localStorage.removeItem('pulse_bi_user_rbac');
+            localStorage.removeItem('pulse_bi_user_v2');
             currentUser = null;
             showOnboardingView();
         }
 
-        function applyRoleTerminology() {
-            const role = currentUser.role;
-            let domainTitle = "Institutional Analytics Studio";
-            let kpi1 = "Total Records";
-            let kpi2 = "Metric Sum";
-
-            if (role === 'CEO' || role === 'COO') {
-                domainTitle = "Executive Strategic Command Center";
-                kpi1 = "Total Transactions";
-                kpi2 = "Gross Revenue / Value";
-            } else if (role === 'CFO') {
-                domainTitle = "Financial Health & Balance Sheet Studio";
-                kpi1 = "Total Ledger Entries";
-                kpi2 = "Total Financial Sum";
-            } else if (role === 'Retail Manager' || role === 'Sales Head') {
-                domainTitle = "Retail & Commercial Sales Performance Hub";
-                kpi1 = "Units Sold / Orders";
-                kpi2 = "Total Sales Volume";
-            } else if (role === 'School Principal' || role === 'University Dean') {
-                domainTitle = "Academic Enrollment & Student Performance Portal";
-                kpi1 = "Total Students Enrolled";
-                kpi2 = "Cumulative Score / Units";
-            } else if (role === 'Hospital Administrator') {
-                domainTitle = "Medical Operations & Patient Flow Studio";
-                kpi1 = "Total Patient Records";
-                kpi2 = "Total Service Metrics";
-            } else if (role === 'Personal Finance Planner') {
-                domainTitle = "Personal Wealth & Budget Intelligence";
-                kpi1 = "Transaction Count";
-                kpi2 = "Net Financial Total";
+        // Institutional Templates (APR, MPR, HR, HSSEQ, IASL, FINANCE)
+        function loadSampleTemplate(type) {
+            let mockRows = [];
+            if (type === 'finance') {
+                mockRows = [
+                    { category: "Cloud Infra", department: "IT", month: "Jan", revenue: 145000, expenses: 90000, headcount: 45 },
+                    { category: "Enterprise BI", department: "Sales", month: "Feb", revenue: 190000, expenses: 110000, headcount: 60 },
+                    { category: "Data Engineering", department: "Engineering", month: "Mar", revenue: 230000, expenses: 130000, headcount: 85 },
+                    { category: "Cloud Infra", department: "IT", month: "Apr", revenue: 175000, expenses: 95000, headcount: 48 },
+                    { category: "Enterprise BI", department: "Sales", month: "May", revenue: 210000, expenses: 115000, headcount: 62 },
+                    { category: "Data Engineering", department: "Engineering", month: "Jun", revenue: 260000, expenses: 140000, headcount: 90 }
+                ];
             } else {
-                domainTitle = `${role} Analytics & Operations Studio`;
+                mockRows = [
+                    { category: "Safety Incidents", department: "Operations", month: "Jan", revenue: 2, expenses: 1200, headcount: 120 },
+                    { category: "Lost Time Injury", department: "Logistics", month: "Feb", revenue: 1, expenses: 4500, headcount: 85 },
+                    { category: "Near Miss", department: "Engineering", month: "Mar", revenue: 5, expenses: 300, headcount: 200 },
+                    { category: "Safety Incidents", department: "Operations", month: "Apr", revenue: 0, expenses: 0, headcount: 125 },
+                    { category: "Lost Time Injury", department: "Logistics", month: "May", revenue: 2, expenses: 6200, headcount: 88 },
+                    { category: "Near Miss", department: "Engineering", month: "Jun", revenue: 3, expenses: 150, headcount: 210 }
+                ];
             }
 
-            document.getElementById('studioHeaderTitle').innerHTML = `<i class="fa-solid fa-building-columns text-indigo-400"></i> <span>${domainTitle}</span>`;
-            document.getElementById('kpiLabel1').innerText = kpi1;
-            document.getElementById('kpiLabel2').innerText = kpi2;
-        }
+            const headers = Object.keys(mockRows[0]);
+            const columnTypes = { category: "string", department: "string", month: "string", revenue: "integer", expenses: "integer", headcount: "integer" };
 
-        // Setup Wizard Tabs
-        function switchSetupTab(tab) {
-            const isDb = (tab === 'db');
-            document.getElementById('setupContentDb').classList.toggle('hidden', !isDb);
-            document.getElementById('setupContentFile').classList.toggle('hidden', isDb);
-            document.getElementById('setupTabDbBtn').className = isDb ? "pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer" : "pb-2 text-slate-400 hover:text-white cursor-pointer";
-            document.getElementById('setupTabFileBtn').className = !isDb ? "pb-2 text-indigo-400 border-b-2 border-indigo-500 cursor-pointer" : "pb-2 text-slate-400 hover:text-white cursor-pointer";
-        }
-
-        // Connect Database / Client Environment
-        function connectSetupDatabase() {
-            const dbType = document.getElementById('setupDbType').value;
-            const host = document.getElementById('setupDbHost').value || 'client-env.production.db';
-            const dbName = document.getElementById('setupDbName').value || 'enterprise_db';
-
-            const mockClientRows = [
-                { entity_id: "ENT-101", category: "Cloud Infrastructure", region: "North America", performance_score: 94.5, revenue: 125000, status: "Active" },
-                { entity_id: "ENT-102", category: "Enterprise BI", region: "Europe", performance_score: 88.2, revenue: 98000, status: "Active" },
-                { entity_id: "ENT-103", category: "Data Engineering", region: "Asia-Pacific", performance_score: 91.0, revenue: 145000, status: "Pending" },
-                { entity_id: "ENT-104", category: "Cloud Infrastructure", region: "North America", performance_score: 79.4, revenue: 67000, status: "Active" },
-                { entity_id: "ENT-105", category: "Enterprise BI", region: "Africa", performance_score: 95.8, revenue: 210000, status: "Active" },
-                { entity_id: "ENT-106", category: "Data Engineering", region: "Europe", performance_score: 84.6, revenue: 115000, status: "Active" }
-            ];
-
-            const headers = Object.keys(mockClientRows[0]);
-            const columnTypes = { entity_id: "string", category: "string", region: "string", performance_score: "decimal", revenue: "integer", status: "string" };
-
-            unifiedDataset = { fileNames: [`[Live DB] ${dbType.toUpperCase()}://${host}/${dbName}`], headers, rows: mockClientRows, columnTypes };
-            saveUserWorkspace();
+            activeDataset = { name: `${type.toUpperCase()} Master Report`, headers, rows: mockRows, columnTypes };
             showDashboardView();
+            initVisualBuilder();
         }
 
-        // File Ingestion in Setup Wizard
+        function switchReportTemplate(templateName) {
+            document.getElementById('activeReportBadge').innerText = `${templateName} Report Suite`;
+            loadSampleTemplate(templateName.toLowerCase() === 'finance' ? 'finance' : 'hsseq');
+        }
+
+        // Custom File Upload in Setup
         async function handleSetupFilesSelected(e) {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
-
-            document.getElementById('setupFileLabel').innerText = `${files.length} file(s) processed. Launching...`;
-            
-            let allRows = [];
-            let fileNames = [];
-            let masterHeadersSet = new Set();
-
-            for (let file of files) {
-                fileNames.push(file.name);
-                try {
-                    const rows = await parseFile(file);
-                    if (rows && rows.length > 0) {
-                        Object.keys(rows[0]).forEach(h => masterHeadersSet.add(h));
-                        allRows = allRows.concat(rows);
-                    }
-                } catch (err) {
-                    console.error(`Error parsing ${file.name}:`, err);
-                }
-            }
-
-            if (allRows.length === 0) {
-                alert("Could not extract valid data rows from the selected files.");
-                return;
-            }
-
-            const headers = Array.from(masterHeadersSet);
-            const normalizedRows = allRows.map(row => {
-                const newRow = {};
-                headers.forEach(h => {
-                    newRow[h] = row[h] !== undefined ? row[h] : "";
-                });
-                return newRow;
-            });
-
+            const rows = await parseFile(files[0]);
+            const headers = Object.keys(rows[0]);
             const columnTypes = {};
-            headers.forEach(header => {
-                let inferred = 'string';
-                for (let i = 0; i < Math.min(normalizedRows.length, 10); i++) {
-                    const t = inferDataType(normalizedRows[i][header]);
-                    if (t !== 'string') {
-                        inferred = t;
-                        break;
-                    }
-                }
-                columnTypes[header] = inferred;
-            });
+            headers.forEach(h => columnTypes[h] = 'string');
 
-            unifiedDataset = { fileNames, headers, rows: normalizedRows, columnTypes };
-            saveUserWorkspace();
+            activeDataset = { name: files[0].name, headers, rows, columnTypes };
             showDashboardView();
+            initVisualBuilder();
         }
 
         function parseFile(file) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const reader = new FileReader();
-                const fileName = file.name.toLowerCase();
-
-                if (fileName.endsWith('.csv')) {
-                    reader.onload = (e) => resolve(parseCSVText(e.target.result));
-                    reader.readAsText(file);
-                } else if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
-                    reader.onload = (e) => {
-                        try {
-                            const data = new Uint8Array(e.target.result);
-                            const workbook = XLSX.read(data, { type: 'array' });
-                            const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                            const jsonRows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-                            resolve(jsonRows);
-                        } catch (err) {
-                            reject(err);
-                        }
-                    };
-                    reader.readAsArrayBuffer(file);
-                } else {
-                    resolve([]);
-                }
+                reader.onload = (e) => {
+                    const workbook = XLSX.read(e.target.result, { type: 'array' });
+                    const jsonRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], { defval: "" });
+                    resolve(jsonRows);
+                };
+                reader.readAsArrayBuffer(file);
             });
         }
 
-        function parseCSVText(text) {
-            const lines = text.split('\n').filter(l => l.trim() !== '');
-            if (lines.length < 2) return [];
-            const headers = lines[0].split(',').map(h => h.trim().replace(/^["']|["']$/g, ''));
-            const rows = [];
-            for (let i = 1; i < lines.length; i++) {
-                const currentLine = lines[i].split(',');
-                if (currentLine.length > 0) {
-                    const obj = {};
-                    headers.forEach((h, index) => {
-                        let val = currentLine[index] ? currentLine[index].trim().replace(/^["']|["']$/g, '') : "";
-                        obj[h] = val;
-                    });
-                    rows.push(obj);
-                }
-            }
-            return rows;
-        }
+        // Visual Builder Studio Initialization
+        function initVisualBuilder() {
+            if (!activeDataset) return;
 
-        function inferDataType(value) {
-            if (value === null || value === undefined || value === '') return 'string';
-            if (!isNaN(value)) {
-                return Number.isInteger(Number(value)) ? 'integer' : 'decimal';
-            }
-            const lower = String(value).toLowerCase();
-            if (lower === 'true' || lower === 'false') return 'boolean';
-            if (!isNaN(Date.parse(value)) && String(value).length > 5) return 'date';
-            return 'string';
-        }
+            const xSelect = document.getElementById('visualXAxis');
+            const ySelect = document.getElementById('visualYAxis');
+            xSelect.innerHTML = '';
+            ySelect.innerHTML = '';
 
-        function saveUserWorkspace() {
-            if (!currentUser || !unifiedDataset) return;
-            localStorage.setItem(`pulse_bi_rbac_data_${currentUser.email}`, JSON.stringify(unifiedDataset));
-        }
-
-        function loadUserWorkspace() {
-            if (!currentUser) return;
-            const stored = localStorage.getItem(`pulse_bi_rbac_data_${currentUser.email}`);
-            if (stored) {
-                unifiedDataset = JSON.parse(stored);
-            }
-        }
-
-        function initDashboardStudio() {
-            if (!unifiedDataset) return;
-
-            document.getElementById('activeSourceSummary').innerText = `Connected: ${unifiedDataset.fileNames[0]}`;
-
-            const xAxisSelect = document.getElementById('xAxisSelect');
-            xAxisSelect.innerHTML = '';
-            unifiedDataset.headers.forEach(h => {
-                const opt = document.createElement('option');
-                opt.value = h;
-                opt.innerText = `${h} (${unifiedDataset.columnTypes[h]})`;
-                xAxisSelect.appendChild(opt);
+            activeDataset.headers.forEach(h => {
+                xSelect.innerHTML += `<option value="${h}">${h}</option>`;
+                ySelect.innerHTML += `<option value="${h}">${h}</option>`;
             });
 
-            const yAxisSelect = document.getElementById('yAxisSelect');
-            yAxisSelect.innerHTML = '';
-            unifiedDataset.headers.forEach(h => {
-                const opt = document.createElement('option');
-                opt.value = h;
-                opt.innerText = `${h} (${unifiedDataset.columnTypes[h]})`;
-                yAxisSelect.appendChild(opt);
-            });
+            // Set smart defaults
+            if (activeDataset.headers.length > 1) {
+                xSelect.value = activeDataset.headers[0];
+                ySelect.value = activeDataset.headers.find(h => ['integer', 'decimal'].includes(activeDataset.columnTypes[h])) || activeDataset.headers[1];
+            }
 
-            const stringCol = unifiedDataset.headers.find(h => unifiedDataset.columnTypes[h] === 'string');
-            const numericCol = unifiedDataset.headers.find(h => ['integer', 'decimal'].includes(unifiedDataset.columnTypes[h]));
-            
-            if (stringCol) xAxisSelect.value = stringCol;
-            if (numericCol) yAxisSelect.value = numericCol;
-
-            renderActiveDashboard();
-            renderTableRecords(unifiedDataset.rows);
+            renderVisualCanvas();
+            renderTableRecords(activeDataset.rows);
         }
 
-        function renderActiveDashboard() {
-            if (!unifiedDataset) return;
+        // Render Visual Canvas & Charts
+        function renderVisualCanvas() {
+            if (!activeDataset) return;
 
-            const chartType = document.getElementById('chartTypeSelect').value;
-            const xCol = document.getElementById('xAxisSelect').value;
-            const yCol = document.getElementById('yAxisSelect').value;
+            const visualType = document.getElementById('visualTypeSelect').value;
+            const xCol = document.getElementById('visualXAxis').value;
+            const yCol = document.getElementById('visualYAxis').value;
+            const agg = document.getElementById('visualAgg').value;
 
-            document.getElementById('kpiValue1').innerText = unifiedDataset.rows.length.toLocaleString();
+            document.getElementById('canvasVisualTitle').innerText = `${visualType.toUpperCase()} Visual: ${yCol} by ${xCol} (${agg.toUpperCase()})`;
 
-            let metricSum = unifiedDataset.rows.reduce((acc, curr) => acc + (parseFloat(curr[yCol]) || 0), 0);
-            document.getElementById('kpiValue2').innerText = metricSum > 1000000 ? (metricSum / 1000000).toFixed(2) + 'M' : metricSum.toLocaleString();
-
-            document.getElementById('primaryChartTitle').innerText = `${currentUser.role} View — ${chartType.toUpperCase()}: ${yCol} by ${xCol}`;
-
+            // Aggregate Data
             const aggregated = {};
-            unifiedDataset.rows.forEach(r => {
-                const key = r[xCol] !== undefined && r[xCol] !== "" ? String(r[xCol]) : "Unassigned";
+            activeDataset.rows.forEach(r => {
+                const key = String(r[xCol] || 'Unassigned');
                 const val = parseFloat(r[yCol]) || 0;
-                aggregated[key] = (aggregated[key] || 0) + val;
+                if (!aggregated[key]) aggregated[key] = { sum: 0, count: 0 };
+                aggregated[key].sum += val;
+                aggregated[key].count += 1;
             });
 
-            const labels = Object.keys(aggregated).slice(0, 25);
-            const dataVals = labels.map(l => aggregated[l]);
+            const labels = Object.keys(aggregated);
+            const dataVals = labels.map(l => {
+                if (agg === 'avg') return aggregated[l].sum / aggregated[l].count;
+                if (agg === 'count') return aggregated[l].count;
+                return aggregated[l].sum;
+            });
+
+            const totalSum = dataVals.reduce((a, b) => a + b, 0);
+            document.getElementById('kpiCardValue').innerText = totalSum > 1000000 ? (totalSum / 1000000).toFixed(2) + 'M' : totalSum.toLocaleString();
+            document.getElementById('kpiRowsValue').innerText = activeDataset.rows.length;
 
             if (primaryChartInstance) primaryChartInstance.destroy();
             const ctx = document.getElementById('primaryChart').getContext('2d');
 
-            let configType = 'bar';
-            let fillArea = false;
-
-            if (chartType === 'line') {
-                configType = 'line';
-                fillArea = true;
-            } else if (chartType === 'doughnut') {
-                configType = 'doughnut';
+            if (visualType === 'table') {
+                return; // Table view handled separately in grid
             }
 
+            let chartConfigType = 'bar';
+            if (visualType === 'line') chartConfigType = 'line';
+            if (visualType === 'doughnut') chartConfigType = 'doughnut';
+            if (visualType === 'gauge') chartConfigType = 'bar'; // Render gauge as prominent progress bar or bar
+
             primaryChartInstance = new Chart(ctx, {
-                type: configType,
+                type: chartConfigType,
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: `${yCol} (${currentUser.role} Metric)`,
+                        label: `${yCol} (${agg})`,
                         data: dataVals,
-                        backgroundColor: chartType === 'doughnut' ? ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'] : '#6366f1',
+                        backgroundColor: chartConfigType === 'doughnut' ? ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'] : '#6366f1',
                         borderColor: '#818cf8',
-                        borderWidth: chartType === 'line' ? 3 : 0,
-                        fill: fillArea,
-                        borderRadius: chartType === 'bar' ? 6 : 0,
+                        borderWidth: chartConfigType === 'line' ? 3 : 0,
+                        borderRadius: 6,
                         tension: 0.3
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { 
-                            display: chartType === 'doughnut', 
-                            position: 'bottom', 
-                            labels: { color: '#94a3b8', boxWidth: 12, font: { size: 11 } } 
-                        }
-                    },
-                    scales: chartType === 'doughnut' ? {} : {
-                        x: { 
-                            title: { display: true, text: xCol, color: '#94a3b8', font: { weight: 'bold' } },
-                            ticks: { color: '#64748b', font: { size: 10 } }, 
-                            grid: { color: 'rgba(51, 65, 85, 0.3)' } 
-                        },
-                        y: { 
-                            title: { display: true, text: `Sum of ${yCol}`, color: '#94a3b8', font: { weight: 'bold' } },
-                            ticks: { color: '#64748b', font: { size: 10 } }, 
-                            grid: { color: 'rgba(51, 65, 85, 0.3)' } 
-                        }
+                    plugins: { legend: { display: chartConfigType === 'doughnut', position: 'bottom', labels: { color: '#94a3b8' } } },
+                    scales: chartConfigType === 'doughnut' ? {} : {
+                        x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
+                        y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } }
                     }
                 }
             });
         }
 
-        function renderTableRecords(rowsToRender) {
-            if (!unifiedDataset) return;
+        function renderTableRecords(rows) {
+            if (!activeDataset) return;
             const thead = document.getElementById('tableHead');
             const tbody = document.getElementById('tableBody');
 
-            thead.innerHTML = `<tr class="border-b border-slate-800 text-slate-400 uppercase text-xs tracking-wider">${unifiedDataset.headers.map(h => `<th class="py-3 px-4 font-semibold">${h} <span class="text-[10px] text-indigo-400 font-mono lowercase">(${unifiedDataset.columnTypes[h]})</span></th>`).join('')}</tr>`;
-            
+            thead.innerHTML = `<tr class="border-b border-slate-800 text-slate-400 uppercase">${activeDataset.headers.map(h => `<th class="py-2 px-3">${h}</th>`).join('')}</tr>`;
             tbody.innerHTML = '';
-            rowsToRender.slice(0, 50).forEach(row => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/40 transition';
-                tr.innerHTML = unifiedDataset.headers.map(h => `<td class="py-3 px-4 text-slate-300 truncate max-w-xs">${row[h]}</td>`).join('');
-                tbody.appendChild(tr);
+            rows.forEach(r => {
+                tbody.innerHTML += `<tr class="hover:bg-slate-800/40">${activeDataset.headers.map(h => `<td class="py-2 px-3">${r[h]}</td>`).join('')}</tr>`;
             });
         }
 
         function searchTableRecords() {
-            if (!unifiedDataset) return;
+            if (!activeDataset) return;
             const query = document.getElementById('tableSearch').value.toLowerCase();
-            const filtered = unifiedDataset.rows.filter(row => 
-                Object.values(row).some(val => String(val).toLowerCase().includes(query))
-            );
+            const filtered = activeDataset.rows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(query)));
             renderTableRecords(filtered);
         }
+
+        // Measure Modal & Publisher
+        function openMeasureModal() { document.getElementById('measureModal').classList.remove('hidden'); }
+        function closeMeasureModal() { document.getElementById('measureModal').classList.add('hidden'); }
+        function saveNewMeasure() {
+            const name = document.getElementById('measureName').value;
+            const expr = document.getElementById('measureExpr').value;
+            if (name && expr) {
+                customMeasures[name] = expr;
+                alert(`Measure "${name}" successfully authored and compiled!`);
+                closeMeasureModal();
+            }
+        }
+
+        function openPublishModal() { document.getElementById('publishModal').classList.remove('hidden'); }
+        function closePublishModal() { document.getElementById('publishModal').classList.add('hidden'); }
     </script>
 </body>
 </html>
