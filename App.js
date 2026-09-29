@@ -1,5 +1,5 @@
 let currentUser = null;
-let unifiedDataset = null; // Stores combined rows, file names, and column types
+let unifiedDataset = null; 
 let primaryChartInstance = null;
 let secondaryChartInstance = null;
 
@@ -92,7 +92,6 @@ async function handleMultipleFilesSelected(e) {
 
     const headers = Array.from(masterHeadersSet);
     
-    // Normalize rows so all objects share the master header set
     const normalizedRows = allRows.map(row => {
         const newRow = {};
         headers.forEach(h => {
@@ -101,7 +100,6 @@ async function handleMultipleFilesSelected(e) {
         return newRow;
     });
 
-    // Infer data types across columns
     const columnTypes = {};
     headers.forEach(header => {
         let inferred = 'string';
@@ -191,8 +189,8 @@ function renderSchemaPreviewModal() {
         if (type === 'date') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
 
         const tag = document.createElement('div');
-        tag.className = `flex items-center justify-between bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg text-xs w-full sm:w-[48%]`;
-        tag.innerHTML = `<span class="font-medium text-white truncate mr-2">${h}</span> <span class="border px-2 py-0.5 rounded-md font-mono ${badgeColor}">${type}</span>`;
+        tag.className = `flex items-center justify-between bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg text-xs w-full`;
+        tag.innerHTML = `<span class="font-medium text-white truncate mr-2">${h}</span> <span class="border px-2 py-0.5 rounded-md font-mono ${badgeColor} flex-shrink-0">${type}</span>`;
         container.appendChild(tag);
     });
 
@@ -259,7 +257,7 @@ function renderDashboardUI() {
     initCharts(numericCol);
 }
 
-// Chart.js Generation
+// Chart.js Generation optimized for mobile/desktop aspect ratios
 function initCharts(numericCol) {
     const catCol = unifiedDataset.headers.find(h => unifiedDataset.columnTypes[h] === 'string') || unifiedDataset.headers[0];
     
@@ -288,10 +286,10 @@ function initCharts(numericCol) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: '#94a3b8' } } },
+            plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
             scales: {
-                x: { ticks: { color: '#64748b' }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
-                y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(51, 65, 85, 0.3)' } }
+                x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
+                y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } }
             }
         }
     });
@@ -311,7 +309,7 @@ function initCharts(numericCol) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', boxWidth: 12 } } },
+            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', boxWidth: 10, font: { size: 11 } } } },
             cutout: '70%'
         }
     });
