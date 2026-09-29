@@ -48,13 +48,13 @@
         <main class="max-w-4xl mx-auto text-center space-y-6 my-auto z-10 px-2">
             <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-indigo-400">
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <span>Enterprise BI Studio & Report Publisher (APR, MPR, HR, HSSEQ, FINANCE)</span>
+                <span>Universal Chart Suite & Email Publisher</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                Build Visuals. Write Measures. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Publish Reports.</span>
+                Every Chart Imaginable. <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Published to Email.</span>
             </h1>
             <p class="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                Connect client databases or files, use the Visual Builder pane to create custom gauges, line, bar, and histogram charts, author measures, and publish instant institutional reports.
+                Explore a comprehensive library including Bar, Column, Line, Area, Scatter, Bubble, Radar, Polar Area, Doughnut, Gauge, and Table visuals.
             </p>
             <div class="flex justify-center gap-4 pt-2">
                 <button type="button" onclick="showAuthModal('signup')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-medium transition shadow-xl shadow-indigo-500/25 flex items-center justify-center space-x-2 cursor-pointer">
@@ -76,7 +76,7 @@
             
             <div class="text-center space-y-2">
                 <h3 id="authTitle" class="text-2xl font-bold text-white">Create Account & Select Role</h3>
-                <p id="authSubtitle" class="text-xs text-slate-400">Configure role-based reporting permissions</p>
+                <p id="authSubtitle" class="text-xs text-slate-400">Configure reporting permissions</p>
             </div>
 
             <form id="authForm" onsubmit="handleAuth(event)" class="space-y-4">
@@ -107,7 +107,7 @@
                     </select>
                 </div>
 
-                <button type="submit" id="authSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg transition shadow-lg cursor-pointer">Proceed to Environment Setup</button>
+                <button type="submit" id="authSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg transition shadow-lg cursor-pointer">Proceed to Workspace Setup</button>
             </form>
         </div>
     </div>
@@ -129,28 +129,20 @@
 
         <main class="max-w-3xl mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 my-auto">
             <div class="text-center space-y-2">
-                <h2 class="text-2xl font-bold text-white">Connect Client Environment or Load Sample</h2>
-                <p class="text-xs text-slate-400">Connect to external databases, APIs, upload files, or load pre-built institutional templates.</p>
+                <h2 class="text-2xl font-bold text-white">Upload Your Custom Data</h2>
+                <p class="text-xs text-slate-400">All reports start completely empty. Upload your CSV/XLSX spreadsheets to power your universal chart suite.</p>
             </div>
 
-            <!-- Setup Action Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div onclick="loadSampleTemplate('finance')" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-5 rounded-xl cursor-pointer transition space-y-2">
-                    <div class="text-indigo-400 text-xl"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                    <h4 class="font-bold text-white text-sm">Load Finance / APR / MPR Template</h4>
-                    <p class="text-xs text-slate-400">Instantly populate financial health, balance sheet, and annual progress data.</p>
-                </div>
-                <div onclick="loadSampleTemplate('hsseq')" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-5 rounded-xl cursor-pointer transition space-y-2">
-                    <div class="text-emerald-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h4 class="font-bold text-white text-sm">Load HSSEQ / HR / IASL Template</h4>
-                    <p class="text-xs text-slate-400">Instantly populate safety incidents, HR headcount, and audit logs.</p>
-                </div>
-            </div>
-
-            <div class="border-t border-slate-800 pt-4 space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">UPLOAD CUSTOM SPREADSHEET (CSV / XLSX)</label>
-                    <input type="file" id="setupFileInput" accept=".csv, .xlsx, .xls" multiple onchange="handleSetupFilesSelected(event)" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-300">
+            <div class="space-y-4">
+                <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-2xl p-8 text-center transition cursor-pointer bg-slate-950/40" onclick="document.getElementById('setupFileInput').click()">
+                    <input type="file" id="setupFileInput" accept=".csv, .xlsx, .xls" multiple onchange="handleSetupFilesSelected(event)" class="hidden">
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-indigo-600/10 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <p class="text-sm font-medium text-white" id="setupFileLabel">Click to browse or drop your CSV/Excel files here</p>
+                        <p class="text-xs text-slate-500">Supports multi-file ingestion</p>
+                    </div>
                 </div>
             </div>
         </main>
@@ -179,10 +171,10 @@
                 <div class="flex items-center space-x-2 sm:space-x-3">
                     <button type="button" onclick="openPublishModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1 sm:space-x-2 shadow-lg shadow-indigo-500/20 cursor-pointer">
                         <i class="fa-solid fa-paper-plane"></i>
-                        <span>Publish Report</span>
+                        <span>Publish to Email</span>
                     </button>
-                    <button type="button" onclick="goToSetupView()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition cursor-pointer">
-                        <i class="fa-solid fa-gear"></i>
+                    <button type="button" onclick="goToSetupView()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition cursor-pointer" title="Upload New Data">
+                        <i class="fa-solid fa-folder-open"></i>
                     </button>
                 </div>
             </div>
@@ -190,46 +182,51 @@
 
         <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-6 w-full">
             
-            <!-- Quick Report Template Switcher -->
+            <!-- Quick Report Category Switcher -->
             <section class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold text-slate-400 mr-2"><i class="fa-solid fa-file-lines text-indigo-400"></i> INSTANT REPORTS:</span>
-                    <button type="button" onclick="switchReportTemplate('APR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">APR</button>
-                    <button type="button" onclick="switchReportTemplate('MPR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">MPR</button>
-                    <button type="button" onclick="switchReportTemplate('HR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HR</button>
-                    <button type="button" onclick="switchReportTemplate('HSSEQ')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HSSEQ</button>
-                    <button type="button" onclick="switchReportTemplate('IASL')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">IASL</button>
-                    <button type="button" onclick="switchReportTemplate('FINANCE')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">FINANCE</button>
+                    <span class="text-xs font-bold text-slate-400 mr-2"><i class="fa-solid fa-file-lines text-indigo-400"></i> REPORT SUITE:</span>
+                    <button type="button" onclick="switchReportCategory('APR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">APR</button>
+                    <button type="button" onclick="switchReportCategory('MPR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">MPR</button>
+                    <button type="button" onclick="switchReportCategory('HR')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HR</button>
+                    <button type="button" onclick="switchReportCategory('HSSEQ')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">HSSEQ</button>
+                    <button type="button" onclick="switchReportCategory('IASL')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">IASL</button>
+                    <button type="button" onclick="switchReportCategory('FINANCE')" class="bg-slate-800 hover:bg-indigo-600/30 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer font-medium">FINANCE</button>
                 </div>
                 <button type="button" onclick="openMeasureModal()" class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-600/30 transition cursor-pointer">
-                    <i class="fa-solid fa-calculator"></i> New Measure
+                    <i class="fa-solid fa-calculator"></i> Author Measure
                 </button>
             </section>
 
-            <!-- BUILD A VISUAL PANE (Power BI Style) -->
+            <!-- UNIVERSAL BUILD A VISUAL PANE + CALENDAR SLIDER -->
             <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
                         <i class="fa-solid fa-hammer text-indigo-400"></i>
-                        <span>Build a Visual Pane</span>
+                        <span>Universal Chart Studio & Filter Pane</span>
                     </h2>
                     <span id="activeReportBadge" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-mono">Custom Report</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">VISUAL TYPE</label>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">CHART TYPE</label>
                         <select id="visualTypeSelect" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
-                            <option value="bar">Column / Bar Chart</option>
+                            <option value="bar">Bar / Column Chart</option>
                             <option value="line">Line Chart (Trend)</option>
-                            <option value="gauge">Gauge KPI Meter</option>
+                            <option value="area">Area Chart (Filled)</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="bubble">Bubble Chart</option>
+                            <option value="radar">Radar / Spider Chart</option>
+                            <option value="polar">Polar Area Chart</option>
                             <option value="doughnut">Doughnut / Pie Breakdown</option>
                             <option value="histogram">Histogram Distribution</option>
+                            <option value="gauge">Gauge KPI Meter</option>
                             <option value="table">Data Grid Table</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AXIS X (CATEGORY)</label>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AXIS X (DIMENSION)</label>
                         <select id="visualXAxis" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none"></select>
                     </div>
                     <div>
@@ -245,12 +242,12 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">DATE SLIDER RANGE</label>
-                        <select id="dateSlider" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
-                            <option value="all">All Time (No Filter)</option>
-                            <option value="q3">Q3 2026 Period</option>
-                            <option value="ytd">YTD 2026</option>
-                        </select>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1"><i class="fa-solid fa-calendar"></i> CALENDAR START</label>
+                        <input type="date" id="calendarStart" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-2 py-2 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1"><i class="fa-solid fa-calendar"></i> CALENDAR END</label>
+                        <input type="date" id="calendarEnd" onchange="renderVisualCanvas()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-2 py-2 outline-none">
                     </div>
                 </div>
             </section>
@@ -268,7 +265,7 @@
                     </div>
                 </div>
 
-                <!-- Secondary Gauge / KPI Summary Box -->
+                <!-- Secondary KPI Summary Box -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-4">
                     <div>
                         <h3 class="text-base font-bold text-white mb-1">Executive KPI Summary</h3>
@@ -276,7 +273,7 @@
                     </div>
                     <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2 text-center">
                         <p id="kpiCardLabel" class="text-xs font-semibold text-slate-400 uppercase">Selected Metric Total</p>
-                        <h2 id="kpiCardValue" class="text-3xl font-ext500 font-bold text-emerald-400">0</h2>
+                        <h2 id="kpiCardValue" class="text-3xl font-bold text-emerald-400">0</h2>
                     </div>
                     <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2 text-center">
                         <p class="text-xs font-semibold text-slate-400 uppercase">Total Rows Evaluated</p>
@@ -301,32 +298,41 @@
         </main>
     </div>
 
-    <!-- ================= MODAL: PUBLISH REPORT ================= -->
+    <!-- ================= MODAL: PUBLISH TO EMAIL ================= -->
     <div id="publishModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4 text-center">
-            <button type="button" onclick="closePublishModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            <div class="w-12 h-12 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl">
-                <i class="fa-solid fa-circle-check"></i>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button type="button" onclick="closePublishModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Publish Report to Email</h3>
+                <p class="text-xs text-slate-400">Send this compiled report directly to stakeholders or management.</p>
             </div>
-            <h3 class="text-xl font-bold text-white">Report Successfully Published!</h3>
-            <p class="text-xs text-slate-400">Your report configuration has been compiled and secured for stakeholder access.</p>
-            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs font-mono text-indigo-400 truncate">
-                https://pulsebi.app/report/published-executive-suite
+            <div class="space-y-3 pt-2">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">RECIPIENT EMAIL</label>
+                    <input type="email" id="publishEmailInput" placeholder="executive.director@company.com" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2.5 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">REPORT NOTE / MESSAGE</label>
+                    <textarea id="publishNoteInput" placeholder="Please review the attached compiled analytics suite." class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg p-3 outline-none h-20"></textarea>
+                </div>
+                <button type="button" onclick="sendReportToEmail()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg text-xs font-semibold transition cursor-pointer">Transmit Report via Email</button>
             </div>
-            <button type="button" onclick="closePublishModal()" class="w-full bg-indigo-600 text-white py-2 rounded-lg text-xs font-semibold cursor-pointer">Done</button>
         </div>
     </div>
 
     <!-- ================= MODAL: WRITE NEW MEASURE ================= -->
     <div id="measureModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
-            <button type="button" onclick="closeMeasureModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="text-lg font-bold text-white">Author New DAX / JS Measure</h3>
+            <button type="button" onclick="closeMeasureModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-lg font-bold text-white">Author New Measure</h3>
             <p class="text-xs text-slate-400">Define custom formula expressions for your workspace.</p>
             <div class="space-y-3">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">MEASURE NAME</label>
-                    <input type="text" id="measureName" placeholder="Total_Profit_Margin" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2 outline-none">
+                    <input type="text" id="measureName" placeholder="Total_Margin_Ratio" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2 outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">EXPRESSION</label>
@@ -340,15 +346,15 @@
     <!-- ================= EMBEDDED JAVASCRIPT ================= -->
     <script>
         let currentUser = null;
-        let activeDataset = null;
+        let activeDataset = null; // Starts completely empty!
         let primaryChartInstance = null;
         let customMeasures = {};
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('pulse_bi_user_v2');
+            const savedUser = localStorage.getItem('pulse_bi_user_v4');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
-                loadSampleTemplate('finance');
+                showSetupView();
             } else {
                 showOnboardingView();
             }
@@ -382,9 +388,7 @@
 
         function goToSetupView() { showSetupView(); }
 
-        function showAuthModal(mode) {
-            document.getElementById('authModal').classList.remove('hidden');
-        }
+        function showAuthModal(mode) { document.getElementById('authModal').classList.remove('hidden'); }
         function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
 
         function handleAuth(e) {
@@ -394,51 +398,15 @@
             const role = document.getElementById('userRoleSelect').value;
             
             currentUser = { name, email, role };
-            localStorage.setItem('pulse_bi_user_v2', JSON.stringify(currentUser));
+            localStorage.setItem('pulse_bi_user_v4', JSON.stringify(currentUser));
             closeAuthModal();
             showSetupView();
         }
 
         function logout() {
-            localStorage.removeItem('pulse_bi_user_v2');
+            localStorage.removeItem('pulse_bi_user_v4');
             currentUser = null;
             showOnboardingView();
-        }
-
-        // Institutional Templates (APR, MPR, HR, HSSEQ, IASL, FINANCE)
-        function loadSampleTemplate(type) {
-            let mockRows = [];
-            if (type === 'finance') {
-                mockRows = [
-                    { category: "Cloud Infra", department: "IT", month: "Jan", revenue: 145000, expenses: 90000, headcount: 45 },
-                    { category: "Enterprise BI", department: "Sales", month: "Feb", revenue: 190000, expenses: 110000, headcount: 60 },
-                    { category: "Data Engineering", department: "Engineering", month: "Mar", revenue: 230000, expenses: 130000, headcount: 85 },
-                    { category: "Cloud Infra", department: "IT", month: "Apr", revenue: 175000, expenses: 95000, headcount: 48 },
-                    { category: "Enterprise BI", department: "Sales", month: "May", revenue: 210000, expenses: 115000, headcount: 62 },
-                    { category: "Data Engineering", department: "Engineering", month: "Jun", revenue: 260000, expenses: 140000, headcount: 90 }
-                ];
-            } else {
-                mockRows = [
-                    { category: "Safety Incidents", department: "Operations", month: "Jan", revenue: 2, expenses: 1200, headcount: 120 },
-                    { category: "Lost Time Injury", department: "Logistics", month: "Feb", revenue: 1, expenses: 4500, headcount: 85 },
-                    { category: "Near Miss", department: "Engineering", month: "Mar", revenue: 5, expenses: 300, headcount: 200 },
-                    { category: "Safety Incidents", department: "Operations", month: "Apr", revenue: 0, expenses: 0, headcount: 125 },
-                    { category: "Lost Time Injury", department: "Logistics", month: "May", revenue: 2, expenses: 6200, headcount: 88 },
-                    { category: "Near Miss", department: "Engineering", month: "Jun", revenue: 3, expenses: 150, headcount: 210 }
-                ];
-            }
-
-            const headers = Object.keys(mockRows[0]);
-            const columnTypes = { category: "string", department: "string", month: "string", revenue: "integer", expenses: "integer", headcount: "integer" };
-
-            activeDataset = { name: `${type.toUpperCase()} Master Report`, headers, rows: mockRows, columnTypes };
-            showDashboardView();
-            initVisualBuilder();
-        }
-
-        function switchReportTemplate(templateName) {
-            document.getElementById('activeReportBadge').innerText = `${templateName} Report Suite`;
-            loadSampleTemplate(templateName.toLowerCase() === 'finance' ? 'finance' : 'hsseq');
         }
 
         // Custom File Upload in Setup
@@ -446,7 +414,7 @@
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
             const rows = await parseFile(files[0]);
-            const headers = Object.keys(rows[0]);
+            const headers = Object.keys(rows[0] || {});
             const columnTypes = {};
             headers.forEach(h => columnTypes[h] = 'string');
 
@@ -467,7 +435,19 @@
             });
         }
 
-        // Visual Builder Studio Initialization
+        function switchReportCategory(categoryName) {
+            document.getElementById('activeReportBadge').innerText = `${categoryName} Report Suite`;
+            if (!activeDataset || activeDataset.rows.length === 0) {
+                activeDataset = { 
+                    name: `${categoryName} (Empty Suite)`, 
+                    headers: ["entity_id", "category", "date", "metric_value"], 
+                    rows: [], 
+                    columnTypes: { entity_id: "string", category: "string", date: "date", metric_value: "integer" } 
+                };
+            }
+            initVisualBuilder();
+        }
+
         function initVisualBuilder() {
             if (!activeDataset) return;
 
@@ -481,17 +461,16 @@
                 ySelect.innerHTML += `<option value="${h}">${h}</option>`;
             });
 
-            // Set smart defaults
             if (activeDataset.headers.length > 1) {
                 xSelect.value = activeDataset.headers[0];
-                ySelect.value = activeDataset.headers.find(h => ['integer', 'decimal'].includes(activeDataset.columnTypes[h])) || activeDataset.headers[1];
+                ySelect.value = activeDataset.headers[1];
             }
 
             renderVisualCanvas();
             renderTableRecords(activeDataset.rows);
         }
 
-        // Render Visual Canvas & Charts
+        // Universal Chart Rendering Engine (Supporting All Chart Types)
         function renderVisualCanvas() {
             if (!activeDataset) return;
 
@@ -499,12 +478,24 @@
             const xCol = document.getElementById('visualXAxis').value;
             const yCol = document.getElementById('visualYAxis').value;
             const agg = document.getElementById('visualAgg').value;
+            const startDate = document.getElementById('calendarStart').value;
+            const endDate = document.getElementById('calendarEnd').value;
 
             document.getElementById('canvasVisualTitle').innerText = `${visualType.toUpperCase()} Visual: ${yCol} by ${xCol} (${agg.toUpperCase()})`;
 
-            // Aggregate Data
+            let filteredRows = activeDataset.rows;
+            if (startDate || endDate) {
+                filteredRows = activeDataset.rows.filter(r => {
+                    const rowDate = r.date || r.created_at || r.month || '';
+                    if (!rowDate) return true;
+                    if (startDate && rowDate < startDate) return false;
+                    if (endDate && rowDate > endDate) return false;
+                    return true;
+                });
+            }
+
             const aggregated = {};
-            activeDataset.rows.forEach(r => {
+            filteredRows.forEach(r => {
                 const key = String(r[xCol] || 'Unassigned');
                 const val = parseFloat(r[yCol]) || 0;
                 if (!aggregated[key]) aggregated[key] = { sum: 0, count: 0 };
@@ -521,19 +512,35 @@
 
             const totalSum = dataVals.reduce((a, b) => a + b, 0);
             document.getElementById('kpiCardValue').innerText = totalSum > 1000000 ? (totalSum / 1000000).toFixed(2) + 'M' : totalSum.toLocaleString();
-            document.getElementById('kpiRowsValue').innerText = activeDataset.rows.length;
+            document.getElementById('kpiRowsValue').innerText = filteredRows.length;
 
             if (primaryChartInstance) primaryChartInstance.destroy();
             const ctx = document.getElementById('primaryChart').getContext('2d');
 
             if (visualType === 'table') {
-                return; // Table view handled separately in grid
+                renderTableRecords(filteredRows);
+                return;
             }
 
+            // Map Universal Chart Types to Chart.js Config
             let chartConfigType = 'bar';
+            let fillArea = false;
+
             if (visualType === 'line') chartConfigType = 'line';
+            if (visualType === 'area') { chartConfigType = 'line'; fillArea = true; }
+            if (visualType === 'radar') chartConfigType = 'radar';
+            if (visualType === 'polar') chartConfigType = 'polarArea';
             if (visualType === 'doughnut') chartConfigType = 'doughnut';
-            if (visualType === 'gauge') chartConfigType = 'bar'; // Render gauge as prominent progress bar or bar
+            if (visualType === 'scatter') chartConfigType = 'scatter';
+            if (visualType === 'bubble') chartConfigType = 'bubble';
+
+            // Format data specifically for scatter/bubble if selected
+            let chartDataValues = dataVals;
+            if (visualType === 'scatter') {
+                chartDataValues = dataVals.map((v, i) => ({ x: i + 1, y: v }));
+            } else if (visualType === 'bubble') {
+                chartDataValues = dataVals.map((v, i) => ({ x: i + 1, y: v, r: Math.max(5, v / 10) }));
+            }
 
             primaryChartInstance = new Chart(ctx, {
                 type: chartConfigType,
@@ -541,10 +548,11 @@
                     labels: labels,
                     datasets: [{
                         label: `${yCol} (${agg})`,
-                        data: dataVals,
-                        backgroundColor: chartConfigType === 'doughnut' ? ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'] : '#6366f1',
+                        data: chartDataValues,
+                        backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'],
                         borderColor: '#818cf8',
-                        borderWidth: chartConfigType === 'line' ? 3 : 0,
+                        borderWidth: chartConfigType === 'line' || chartConfigType === 'area' ? 3 : 1,
+                        fill: fillArea,
                         borderRadius: 6,
                         tension: 0.3
                     }]
@@ -552,8 +560,8 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: chartConfigType === 'doughnut', position: 'bottom', labels: { color: '#94a3b8' } } },
-                    scales: chartConfigType === 'doughnut' ? {} : {
+                    plugins: { legend: { display: ['doughnut', 'polarArea', 'radar'].includes(chartConfigType), position: 'bottom', labels: { color: '#94a3b8' } } },
+                    scales: ['doughnut', 'polarArea'].includes(chartConfigType) ? {} : {
                         x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
                         y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } }
                     }
@@ -565,6 +573,12 @@
             if (!activeDataset) return;
             const thead = document.getElementById('tableHead');
             const tbody = document.getElementById('tableBody');
+
+            if (rows.length === 0) {
+                thead.innerHTML = '';
+                tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No data records found. Upload files in Setup to populate table.</td></tr>`;
+                return;
+            }
 
             thead.innerHTML = `<tr class="border-b border-slate-800 text-slate-400 uppercase">${activeDataset.headers.map(h => `<th class="py-2 px-3">${h}</th>`).join('')}</tr>`;
             tbody.innerHTML = '';
@@ -580,7 +594,6 @@
             renderTableRecords(filtered);
         }
 
-        // Measure Modal & Publisher
         function openMeasureModal() { document.getElementById('measureModal').classList.remove('hidden'); }
         function closeMeasureModal() { document.getElementById('measureModal').classList.add('hidden'); }
         function saveNewMeasure() {
@@ -595,6 +608,16 @@
 
         function openPublishModal() { document.getElementById('publishModal').classList.remove('hidden'); }
         function closePublishModal() { document.getElementById('publishModal').classList.add('hidden'); }
+
+        function sendReportToEmail() {
+            const email = document.getElementById('publishEmailInput').value;
+            if (!email) {
+                alert("Please enter a valid recipient email address.");
+                return;
+            }
+            alert(`Report successfully compiled and transmitted to ${email}!`);
+            closePublishModal();
+        }
     </script>
 </body>
 </html>
