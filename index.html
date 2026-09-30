@@ -69,7 +69,7 @@
         </footer>
     </div>
 
-    <!-- ================= AUTH MODAL (Complete Role Suite) ================= -->
+    <!-- ================= AUTH MODAL ================= -->
     <div id="authModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 max-h-[95vh] overflow-y-auto">
             <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -171,7 +171,6 @@
 
     <!-- ================= VIEW 3: MAIN STUDIO & MULTI-PAGE DASHBOARD ================= -->
     <div id="dashboardView" class="hidden flex-col min-h-screen justify-between">
-        <!-- Top Nav -->
         <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <div class="flex items-center space-x-3 truncate">
@@ -198,7 +197,6 @@
             </div>
         </header>
 
-        <!-- Main Content Canvas -->
         <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-6 w-full flex-grow">
             
             <!-- BUILD A VISUAL PANE + CALENDAR SLIDER -->
@@ -244,11 +242,18 @@
                         <select id="visualYAxis" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none"></select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AGGREGATION</label>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">AGGREGATION / MEASURE</label>
                         <select id="visualAgg" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 outline-none">
                             <option value="sum">Sum</option>
                             <option value="avg">Average</option>
-                            <option value="count">Count</option>
+                            <option value="count">Count (Total Records)</option>
+                            <option value="counta">CountA (Non-Empty)</option>
+                            <option value="distinctcount">Distinct Count (Unique)</option>
+                            <option value="min">Minimum Value</option>
+                            <option value="max">Maximum Value</option>
+                            <option value="median">Median Value</option>
+                            <option value="variance">Statistical Variance</option>
+                            <option value="stddev">Standard Deviation</option>
                         </select>
                     </div>
                     <div>
@@ -271,7 +276,7 @@
 
             <!-- DYNAMIC MULTI-VISUAL CANVAS GRID FOR CURRENT PAGE -->
             <section id="pageVisualsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Dynamically pinned visuals appear here -->
+                <!-- Pinned visuals appear here -->
             </section>
 
             <!-- Secure Data Grid Table -->
@@ -289,11 +294,11 @@
             </section>
         </main>
 
-        <!-- ================= MULTI-PAGE BOTTOM TAB BAR (Inspired by Context Image) ================= -->
+        <!-- ================= MULTI-PAGE BOTTOM TAB BAR ================= -->
         <footer class="bg-slate-900 border-t border-slate-800 py-2.5 px-4 sticky bottom-0 z-40">
             <div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto">
                 <div id="pagesTabContainer" class="flex items-center space-x-2">
-                    <!-- Dynamically rendered tabs -->
+                    <!-- Tabs rendered by JS -->
                 </div>
                 <button type="button" onclick="addNewDashboardPage()" class="bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center space-x-1 whitespace-nowrap">
                     <i class="fa-solid fa-plus"></i>
@@ -365,7 +370,6 @@
         let activeDataset = null; 
         let customMeasures = {};
 
-        // Multi-Page Workspace State
         let dashboardPages = [
             { id: 'page-1', name: 'Executive Overview', visuals: [] },
             { id: 'page-2', name: 'Operations & Safety', visuals: [] }
@@ -373,7 +377,7 @@
         let activePageId = 'page-1';
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('pulse_bi_user_v6');
+            const savedUser = localStorage.getItem('pulse_bi_user_v7');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showSetupView();
@@ -420,13 +424,13 @@
             const role = document.getElementById('userRoleSelect').value;
             
             currentUser = { name, email, role };
-            localStorage.setItem('pulse_bi_user_v6', JSON.stringify(currentUser));
+            localStorage.setItem('pulse_bi_user_v7', JSON.stringify(currentUser));
             closeAuthModal();
             showSetupView();
         }
 
         function logout() {
-            localStorage.removeItem('pulse_bi_user_v6');
+            localStorage.removeItem('pulse_bi_user_v7');
             currentUser = null;
             showOnboardingView();
         }
@@ -479,7 +483,6 @@
             renderTableRecords(activeDataset.rows);
         }
 
-        // Multi-Page Management Functions
         function renderPageTabs() {
             const container = document.getElementById('pagesTabContainer');
             container.innerHTML = '';
@@ -521,7 +524,6 @@
             }
         }
 
-        // Pin Visuals to Current Page Canvas
         function addVisualToCurrentPage() {
             if (!activeDataset) {
                 alert("Please upload a dataset first in Environment Setup.");
@@ -552,7 +554,6 @@
             renderActivePageCanvas();
         }
 
-        // Render All Pinned Visuals on the Active Page Canvas
         function renderActivePageCanvas() {
             const page = dashboardPages.find(p => p.id === activePageId);
             if (!page) return;
@@ -572,8 +573,7 @@
                 return;
             }
 
-            page.visuals.forEach((vis, index) => {
-                const cardId = `canvas-card-${vis.id}`;
+            page.visuals.forEach((vis) => {
                 const canvasId = `canvas-chart-${vis.id}`;
 
                 const card = document.createElement('div');
@@ -592,7 +592,6 @@
                 `;
                 container.appendChild(card);
 
-                // Render Chart using Chart.js after DOM insertion
                 setTimeout(() => renderChartOnCanvas(vis, canvasId), 50);
             });
         }
@@ -616,16 +615,34 @@
             filteredRows.forEach(r => {
                 const key = String(r[vis.xAxis] || 'Unassigned');
                 const val = parseFloat(r[vis.yAxis]) || 0;
-                if (!aggregated[key]) aggregated[key] = { sum: 0, count: 0 };
+                if (!aggregated[key]) aggregated[key] = { values: [], sum: 0, count: 0, min: Infinity, max: -Infinity };
+                aggregated[key].values.push(val);
                 aggregated[key].sum += val;
                 aggregated[key].count += 1;
+                if (val < aggregated[key].min) aggregated[key].min = val;
+                if (val > aggregated[key].max) aggregated[key].max = val;
             });
 
             const labels = Object.keys(aggregated);
             const dataVals = labels.map(l => {
-                if (vis.agg === 'avg') return aggregated[l].sum / aggregated[l].count;
-                if (vis.agg === 'count') return aggregated[l].count;
-                return aggregated[l].sum;
+                const group = aggregated[l];
+                if (vis.agg === 'avg') return group.sum / group.count;
+                if (vis.agg === 'count' || vis.agg === 'counta') return group.count;
+                if (vis.agg === 'distinctcount') return new Set(group.values).size;
+                if (vis.agg === 'min') return group.min === Infinity ? 0 : group.min;
+                if (vis.agg === 'max') return group.max === -Infinity ? 0 : group.max;
+                if (vis.agg === 'median') {
+                    const sorted = [...group.values].sort((a,b) => a - b);
+                    const mid = Math.floor(sorted.length / 2);
+                    return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+                }
+                if (vis.agg === 'variance' || vis.agg === 'stddev') {
+                    const mean = group.sum / group.count;
+                    const squareDiffs = group.values.map(v => Math.pow(v - mean, 2));
+                    const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / group.count;
+                    return vis.agg === 'stddev' ? Math.sqrt(avgSquareDiff) : avgSquareDiff;
+                }
+                return group.sum;
             });
 
             let chartConfigType = 'bar';
