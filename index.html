@@ -69,7 +69,7 @@
         </footer>
     </div>
 
-    <!-- ================= AUTH MODAL (Distinct Log In vs Sign Up Modes) ================= -->
+    <!-- ================= AUTH MODAL ================= -->
     <div id="authModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6 max-h-[95vh] overflow-y-auto">
             <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -207,7 +207,7 @@
                         <span id="currentPageTitleHeading">Visual Canvas Builder</span>
                     </h2>
                     <div class="flex items-center space-x-2">
-                        <button type="button" onclick="renameCurrentPage()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs cursor-pointer">
+                        <button type="button" onclick="openRenamePageModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs cursor-pointer">
                             <i class="fa-solid fa-pen"></i> Rename Page
                         </button>
                         <button type="button" onclick="openMeasureModal()" class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-600/30 transition cursor-pointer">
@@ -300,12 +300,36 @@
                 <div id="pagesTabContainer" class="flex items-center space-x-2">
                     <!-- Tabs rendered by JS -->
                 </div>
-                <button type="button" onclick="addNewDashboardPage()" class="bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center space-x-1 whitespace-nowrap">
+                <button type="button" onclick="openAddPageModal()" class="bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center space-x-1 whitespace-nowrap">
                     <i class="fa-solid fa-plus"></i>
                     <span>Add Page</span>
                 </button>
             </div>
         </footer>
+    </div>
+
+    <!-- ================= MODAL: ADD NEW PAGE ================= -->
+    <div id="addPageModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4">
+            <button type="button" onclick="closeAddPageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-lg font-bold text-white">Create New Dashboard Page</h3>
+            <div class="space-y-3">
+                <input type="text" id="newPageNameInput" placeholder="e.g. Financial Health" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2.5 outline-none">
+                <button type="button" onclick="confirmAddDashboardPage()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-xs font-semibold cursor-pointer">Create Page</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: RENAME CURRENT PAGE ================= -->
+    <div id="renamePageModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4">
+            <button type="button" onclick="closeRenamePageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-lg font-bold text-white">Rename Dashboard Page</h3>
+            <div class="space-y-3">
+                <input type="text" id="renamePageInput" placeholder="Enter new page name" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2.5 outline-none">
+                <button type="button" onclick="confirmRenamePage()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-lg text-xs font-semibold cursor-pointer">Rename Page</button>
+            </div>
+        </div>
     </div>
 
     <!-- ================= MODAL: PUBLISH TO EMAIL ================= -->
@@ -369,7 +393,7 @@
         let currentUser = null;
         let activeDataset = null; 
         let customMeasures = {};
-        let currentAuthMode = 'signup'; // Tracks whether modal is in 'login' or 'signup' mode
+        let currentAuthMode = 'signup';
 
         let dashboardPages = [
             { id: 'page-1', name: 'Executive Overview', visuals: [] },
@@ -378,7 +402,7 @@
         let activePageId = 'page-1';
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('pulse_bi_user_v10');
+            const savedUser = localStorage.getItem('pulse_bi_user_v11');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showSetupView();
@@ -415,16 +439,14 @@
 
         function goToSetupView() { showSetupView(); }
 
-        // Distinctly Handle Log In vs Sign Up / Get Started Modal Modes
         function showAuthModal(mode) {
-            currentAuthMode = mode; // 'login' or 'signup'
+            currentAuthMode = mode;
             const isLogin = (mode === 'login');
 
             document.getElementById('authTitle').innerText = isLogin ? "Welcome Back" : "Create Account & Select Role";
             document.getElementById('authSubtitle').innerText = isLogin ? "Enter your workspace credentials" : "Configure role-based access control (RBAC)";
             document.getElementById('authSubmitBtn').innerText = isLogin ? "Log In to Workspace" : "Proceed to Data Setup";
             
-            // Show/Hide Name and Role fields based on mode
             document.getElementById('nameFieldContainer').classList.toggle('hidden', isLogin);
             document.getElementById('roleFieldContainer').classList.toggle('hidden', isLogin);
 
@@ -436,32 +458,24 @@
         function handleAuth(e) {
             e.preventDefault();
             const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
             
             if (currentAuthMode === 'login') {
-                // Log In Flow
-                currentUser = { 
-                    name: email.split('@')[0], 
-                    email: email, 
-                    role: 'Executive Analyst' 
-                };
-                localStorage.setItem('pulse_bi_user_v10', JSON.stringify(currentUser));
+                currentUser = { name: email.split('@')[0], email: email, role: 'Executive Analyst' };
+                localStorage.setItem('pulse_bi_user_v11', JSON.stringify(currentUser));
                 closeAuthModal();
                 showSetupView();
             } else {
-                // Sign Up / Get Started Flow
                 const name = document.getElementById('authName').value || email.split('@')[0];
                 const role = document.getElementById('userRoleSelect').value;
-                
                 currentUser = { name, email, role };
-                localStorage.setItem('pulse_bi_user_v10', JSON.stringify(currentUser));
+                localStorage.setItem('pulse_bi_user_v11', JSON.stringify(currentUser));
                 closeAuthModal();
                 showSetupView();
             }
         }
 
         function logout() {
-            localStorage.removeItem('pulse_bi_user_v10');
+            localStorage.removeItem('pulse_bi_user_v11');
             currentUser = null;
             showOnboardingView();
         }
@@ -535,23 +549,38 @@
             renderActivePageCanvas();
         }
 
-        function addNewDashboardPage() {
-            const name = prompt("Enter a name for the new dashboard page:", `Page ${dashboardPages.length + 1}`);
+        // Custom Modal Page Management
+        function openAddPageModal() {
+            document.getElementById('newPageNameInput').value = `Page ${dashboardPages.length + 1}`;
+            document.getElementById('addPageModal').classList.remove('hidden');
+        }
+        function closeAddPageModal() { document.getElementById('addPageModal').classList.add('hidden'); }
+        function confirmAddDashboardPage() {
+            const name = document.getElementById('newPageNameInput').value;
             if (name) {
                 const newId = 'page-' + Date.now();
                 dashboardPages.push({ id: newId, name: name.trim(), visuals: [] });
                 switchPage(newId);
+                closeAddPageModal();
             }
         }
 
-        function renameCurrentPage() {
+        function openRenamePageModal() {
             const page = dashboardPages.find(p => p.id === activePageId);
             if (!page) return;
-            const newName = prompt("Rename current dashboard page:", page.name);
+            document.getElementById('renamePageInput').value = page.name;
+            document.getElementById('renamePageModal').classList.remove('hidden');
+        }
+        function closeRenamePageModal() { document.getElementById('renamePageModal').classList.add('hidden'); }
+        function confirmRenamePage() {
+            const page = dashboardPages.find(p => p.id === activePageId);
+            if (!page) return;
+            const newName = document.getElementById('renamePageInput').value;
             if (newName) {
                 page.name = newName.trim();
                 renderPageTabs();
                 renderActivePageCanvas();
+                closeRenamePageModal();
             }
         }
 
