@@ -402,7 +402,7 @@
         let activePageId = 'page-1';
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('pulse_bi_user_v11');
+            const savedUser = localStorage.getItem('pulse_bi_user_v12');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showSetupView();
@@ -461,21 +461,21 @@
             
             if (currentAuthMode === 'login') {
                 currentUser = { name: email.split('@')[0], email: email, role: 'Executive Analyst' };
-                localStorage.setItem('pulse_bi_user_v11', JSON.stringify(currentUser));
+                localStorage.setItem('pulse_bi_user_v12', JSON.stringify(currentUser));
                 closeAuthModal();
                 showSetupView();
             } else {
                 const name = document.getElementById('authName').value || email.split('@')[0];
                 const role = document.getElementById('userRoleSelect').value;
                 currentUser = { name, email, role };
-                localStorage.setItem('pulse_bi_user_v11', JSON.stringify(currentUser));
+                localStorage.setItem('pulse_bi_user_v12', JSON.stringify(currentUser));
                 closeAuthModal();
                 showSetupView();
             }
         }
 
         function logout() {
-            localStorage.removeItem('pulse_bi_user_v11');
+            localStorage.removeItem('pulse_bi_user_v12');
             currentUser = null;
             showOnboardingView();
         }
@@ -549,7 +549,6 @@
             renderActivePageCanvas();
         }
 
-        // Custom Modal Page Management
         function openAddPageModal() {
             document.getElementById('newPageNameInput').value = `Page ${dashboardPages.length + 1}`;
             document.getElementById('addPageModal').classList.remove('hidden');
@@ -658,7 +657,7 @@
 
         function renderChartOnCanvas(vis, canvasId) {
             const ctxElem = document.getElementById(canvasId);
-            if (!ctxElem) return;
+            if (!ctxElem || !activeDataset || !activeDataset.rows) return;
 
             let filteredRows = activeDataset.rows;
             if (vis.startDate || vis.endDate) {
@@ -671,8 +670,11 @@
                 });
             }
 
+            // Safe bounded aggregation loop to prevent any UI freezing
             const aggregated = {};
-            filteredRows.forEach(r => {
+            const maxRows = Math.min(filteredRows.length, 5000);
+            for (let i = 0; i < maxRows; i++) {
+                const r = filteredRows[i];
                 const key = String(r[vis.xAxis] || 'Unassigned');
                 const val = parseFloat(r[vis.yAxis]) || 0;
                 if (!aggregated[key]) aggregated[key] = { values: [], sum: 0, count: 0, min: Infinity, max: -Infinity };
@@ -681,9 +683,9 @@
                 aggregated[key].count += 1;
                 if (val < aggregated[key].min) aggregated[key].min = val;
                 if (val > aggregated[key].max) aggregated[key].max = val;
-            });
+            }
 
-            const labels = Object.keys(aggregated);
+            const labels = Object.keys(aggregated).slice(0, 50);
             const dataVals = labels.map(l => {
                 const group = aggregated[l];
                 const agg = vis.agg;
@@ -746,7 +748,7 @@
             const thead = document.getElementById('tableHead');
             const tbody = document.getElementById('tableBody');
 
-            if (rows.length === 0) {
+            if (!rows || rows.length === 0) {
                 thead.innerHTML = '';
                 tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">No data records found. Upload files in Setup to populate table.</td></tr>`;
                 return;
@@ -754,7 +756,8 @@
 
             thead.innerHTML = `<tr class="border-b border-slate-800 text-slate-400 uppercase">${activeDataset.headers.map(h => `<th class="py-2 px-3">${h}</th>`).join('')}</tr>`;
             tbody.innerHTML = '';
-            rows.forEach(r => {
+            const sliceRows = rows.slice(0, 100);
+            sliceRows.forEach(r => {
                 tbody.innerHTML += `<tr class="hover:bg-slate-800/40">${activeDataset.headers.map(h => `<td class="py-2 px-3">${r[h]}</td>`).join('')}</tr>`;
             });
         }
